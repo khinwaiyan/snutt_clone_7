@@ -7,6 +7,7 @@ export default {
         primary: {
           DEFAULT: '#2bca43',
         },
+        orange: '#F58D3D',
       },
     },
   },
