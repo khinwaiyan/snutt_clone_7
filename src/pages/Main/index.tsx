@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
+import { LoadingPage } from '../../components/Loading';
 import { ServiceContext } from '../../context/ServiceContext';
 import { TokenAuthContext } from '../../context/TokenAuthContext';
 import { TokenManageContext } from '../../context/TokenManageContext';
@@ -19,7 +20,7 @@ export const MainPage = () => {
     contaminateToken('xxx');
   };
 
-  if (userData === undefined) return <div>로딩중...</div>;
+  if (userData === undefined) return <LoadingPage />;
 
   if (userData.type === 'success') {
     return (
