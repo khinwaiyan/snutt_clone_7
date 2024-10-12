@@ -175,17 +175,17 @@ export const App = () => {
     <QueryClientProvider key={token} client={queryClient}>
       <ServiceContext.Provider value={services}>
         <TokenManageContext.Provider value={manageToken}>
-          {token !== null ? (
-            <TokenAuthContext.Provider value={{ token }}>
-              <ModalManageContext.Provider
-                value={{ isModalOpen: isTokenError, closeModal }}
-              >
+          <ModalManageContext.Provider
+            value={{ isModalOpen: isTokenError, closeModal }}
+          >
+            {token !== null ? (
+              <TokenAuthContext.Provider value={{ token }}>
                 <RouterProvider router={SignInRouter} />
-              </ModalManageContext.Provider>
-            </TokenAuthContext.Provider>
-          ) : (
-            <RouterProvider router={UnSignInRouter} />
-          )}
+              </TokenAuthContext.Provider>
+            ) : (
+              <RouterProvider router={UnSignInRouter} />
+            )}
+          </ModalManageContext.Provider>
         </TokenManageContext.Provider>
       </ServiceContext.Provider>
     </QueryClientProvider>
