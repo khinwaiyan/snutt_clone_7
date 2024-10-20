@@ -10,16 +10,30 @@ import { TokenManageContext } from '@/context/TokenManageContext';
 import { useGuardContext } from '@/hooks/useGuardContext';
 import { showDialog } from '@/utils/showDialog';
 
+import { ModalManageContext } from '../../context/ModalManageContext';
+
 export const MainPage = () => {
   const { contaminateToken, clearToken } = useGuardContext(TokenManageContext);
+  const { setOpen } = useGuardContext(ModalManageContext);
   const { userService, authService } = useGuardContext(ServiceContext);
   const { token } = useGuardContext(TokenAuthContext);
   const { showErrorDialog } = showDialog();
 
-  const { data: userData } = useQuery({
-    queryKey: ['UserService', 'getUserInfo', { token }] as const,
-    queryFn: ({ queryKey }) => userService.getUserInfo(queryKey[2]),
+  const { data: userData, isError } = useQuery({
+    queryKey: ['UserService', 'getUserInfo', token] as const,
+    queryFn: ({ queryKey: [, , t] }) => {
+      if (t === null) {
+        throw new Error();
+      }
+      return userService.getUserInfo({ token: t });
+    },
+    enabled: token !== null,
   });
+
+  if (isError) {
+    setOpen(true);
+    return null;
+  }
 
   const handleClickContaminateButton = () => {
     contaminateToken('xxx');
