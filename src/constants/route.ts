@@ -2,6 +2,12 @@ export const PATH = {
   INDEX: '/',
   SIGNIN: '/signin',
   SIGNUP: '/signup',
-  MYPAGE: '/mypage',
+  MYPAGE: {
+    ROOT: '/mypage',
+    INFORMATION: {
+      ROOT: '/mypage/account',
+      NICKNAME: '/mypage/account/change-nickname',
+    },
+  },
   SEARCH: '/search',
 };
