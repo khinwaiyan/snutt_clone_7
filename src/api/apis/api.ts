@@ -4,6 +4,7 @@ import type { Api, GetApiSpecsParameter } from '.';
 import type {
   LocalLoginRequest,
   LocalLoginResponse,
+  TimeTableResponse,
   UserResponse,
 } from './schemas';
 
@@ -25,6 +26,25 @@ export const getSnuttApis = ({
       callWithToken<SuccessResponse<UserResponse>>({
         method: 'get',
         path: 'v1/users/me',
+        token,
+      }),
+    //  최근 시간표 불러오는 api
+    'GET /v1/tables/recent': ({ token }: { token: string }) =>
+      callWithToken<SuccessResponse<TimeTableResponse>>({
+        method: 'get',
+        path: 'v1/tables/recent',
+        token,
+      }),
+    'GET /v1/tables/:timetableId': ({
+      token,
+      params,
+    }: {
+      token: string;
+      params: { timetableId: string };
+    }) =>
+      callWithToken<SuccessResponse<TimeTableResponse>>({
+        method: 'get',
+        path: `/v1/tables/${params.timetableId}`,
         token,
       }),
   }) satisfies Record<string, Api>;
