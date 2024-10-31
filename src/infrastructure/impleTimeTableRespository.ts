@@ -20,6 +20,16 @@ export const impleTimeTableRepository = ({
     }
     return { type: 'error', errcode: data.errcode };
   },
+  getTimeTableList: async ({ token }: { token: string }) => {
+    const { status, data } = await snuttApi['GET /v1/tables']({ token });
+    if (status === 200) {
+      return {
+        type: 'success',
+        data,
+      };
+    }
+    return { type: 'error', errcode: data.errcode };
+  },
   getTimeTableById: async ({
     token,
     timetableId,
@@ -28,6 +38,33 @@ export const impleTimeTableRepository = ({
     timetableId: string;
   }) => {
     const { status, data } = await snuttApi['GET /v1/tables/:timetableId']({
+      token,
+      params: { timetableId },
+    });
+    if (status === 200) {
+      return {
+        type: 'success',
+        data,
+      };
+    }
+    return { type: 'error', errcode: data.errcode };
+  },
+  changeTimeTableName: async ({ token, timetableId, timetableName }) => {
+    const { status, data } = await snuttApi['PUT /v1/tables/:timetableId']({
+      token,
+      params: { timetableId },
+      body: { title: timetableName },
+    });
+    if (status === 200) {
+      return {
+        type: 'success',
+        data,
+      };
+    }
+    return { type: 'error', errcode: data.errcode };
+  },
+  deleteTimeTableById: async ({ token, timetableId }) => {
+    const { status, data } = await snuttApi['DELETE /v1/tables/:timetableId']({
       token,
       params: { timetableId },
     });

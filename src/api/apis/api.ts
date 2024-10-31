@@ -2,8 +2,10 @@ import type { impleSnuttApi } from '..';
 import type { SuccessResponse } from '../response';
 import type { Api, GetApiSpecsParameter } from '.';
 import type {
+  CourseBookResponse,
   LocalLoginRequest,
   LocalLoginResponse,
+  TimeTableBriefResponse,
   TimeTableResponse,
   UserResponse,
 } from './schemas';
@@ -44,7 +46,52 @@ export const getSnuttApis = ({
     }) =>
       callWithToken<SuccessResponse<TimeTableResponse>>({
         method: 'get',
-        path: `/v1/tables/${params.timetableId}`,
+        path: `v1/tables/${params.timetableId}`,
+        token,
+      }),
+    'GET /v1/tables': ({ token }: { token: string }) =>
+      callWithToken<SuccessResponse<TimeTableBriefResponse[]>>({
+        method: 'get',
+        path: 'v1/tables',
+        token,
+      }),
+    'GET /v1/course_books': ({ token }: { token: string }) =>
+      callWithToken<SuccessResponse<CourseBookResponse[]>>({
+        method: 'get',
+        path: 'v1/course_books',
+        token,
+      }),
+    'PUT /v1/tables/:timetableId': ({
+      token,
+      params,
+      body,
+    }: {
+      token: string;
+      params: {
+        timetableId: string;
+      };
+      body: {
+        title: string;
+      };
+    }) =>
+      callWithToken<SuccessResponse<TimeTableBriefResponse[]>>({
+        method: 'PUT',
+        path: `v1/tables/${params.timetableId}`,
+        token,
+        body,
+      }),
+    'DELETE /v1/tables/:timetableId': ({
+      token,
+      params,
+    }: {
+      token: string;
+      params: {
+        timetableId: string;
+      };
+    }) =>
+      callWithToken<SuccessResponse<TimeTableBriefResponse[]>>({
+        method: 'DELETE',
+        path: `v1/tables/${params.timetableId}`,
         token,
       }),
   }) satisfies Record<string, Api>;
