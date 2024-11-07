@@ -27,4 +27,12 @@ export const ICON_SRC = {
   ARROW: {
     DOWN: '/arrow/arrow_down.svg',
   },
+  ADD: '/drawer/Add.svg',
+  CHECK_BOX: {
+    CIRCLE: '/drawer/CheckBoxCircle.svg',
+  },
+  CLOSE: '/drawer/Close.svg',
+  PRIMARY: '/drawer/Primary.svg',
+  COPY: '/drawer/Copy.svg',
+  MORE: '/drawer/More.svg',
 };
