@@ -8,6 +8,10 @@ import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
 
 import type { CallParams } from '@/api';
 import { impleSnuttApi } from '@/api';
+import {
+  AuthProtectedRoute,
+  AuthProtectedSwitchRoute,
+} from '@/components/Auth';
 import { PATH } from '@/constants/route';
 import { EnvContext } from '@/context/EnvContext';
 import { ModalManageContext } from '@/context/ModalManageContext';
@@ -16,10 +20,13 @@ import { TokenAuthContext } from '@/context/TokenAuthContext';
 import { TokenManageContext } from '@/context/TokenManageContext';
 import { useGuardContext } from '@/hooks/useGuardContext';
 import { impleAuthRepository } from '@/infrastructure/impleAuthRepository';
+import { implCourseBookRepository } from '@/infrastructure/impleCourseBookRepository';
 import { implTokenSessionStorageRepository } from '@/infrastructure/impleStorageRepository';
+import { impleTimeTableRepository } from '@/infrastructure/impleTimeTableRespository';
 import { impleUserRepository } from '@/infrastructure/impleUserRepository';
 import { NotFoundPage } from '@/pages/Error';
 import { LandingPage } from '@/pages/Landing';
+import { LectureDetailPage } from '@/pages/Lecture/LectureDetail';
 import { MainPage } from '@/pages/Main';
 import { AccountPage } from '@/pages/MyPage/Account';
 import { ChangeNicknamePage } from '@/pages/MyPage/Account/ChangeNickname';
@@ -27,17 +34,13 @@ import { MyPage } from '@/pages/MyPage/index.tsx';
 import { SignInPage } from '@/pages/SignIn';
 import { SignUpPage } from '@/pages/SignUp';
 import { getAuthService } from '@/usecases/authServices';
+import { getCourseBookService } from '@/usecases/courseBookService';
+import { getTimeTableService } from '@/usecases/timeTableService';
 import { getUserService } from '@/usecases/userService';
 import { showDialog } from '@/utils/showDialog';
 
-import {
-  AuthProtectedRoute,
-  AuthProtectedSwitchRoute,
-} from './components/Auth';
-import { implCourseBookRepository } from './infrastructure/impleCourseBookRepository';
-import { impleTimeTableRepository } from './infrastructure/impleTimeTableRespository';
-import { getCourseBookService } from './usecases/courseBookService';
-import { getTimeTableService } from './usecases/timeTableService';
+import { implLectureRepository } from './infrastructure/impleLecutreRepository';
+import { getLecutureService } from './usecases/lectureService';
 
 // 어떠한 경로로 요청하더라도 Landing Page로 이동할 수 있도록 함.
 // 무효 토큰을 막아야 하는 페이지는 AuthProtectedRoute 사용
@@ -88,6 +91,10 @@ const authRoutes = [
       {
         path: PATH.MYPAGE.ACCOUNT.CHANGENICKNAME,
         element: <ChangeNicknamePage />,
+      },
+      {
+        path: PATH.LECTURE_DETAIL,
+        element: <LectureDetailPage />,
       },
     ],
   },
@@ -152,6 +159,7 @@ export const App = () => {
   const temporaryStorageRepository = implTokenSessionStorageRepository();
   const timeTableRepository = impleTimeTableRepository({ snuttApi });
   const courseBookRepository = implCourseBookRepository({ snuttApi });
+  const lectureRepository = implLectureRepository({ snuttApi });
 
   const authService = getAuthService({
     authRepository,
@@ -160,12 +168,14 @@ export const App = () => {
   const userService = getUserService({ userRepository });
   const timeTableService = getTimeTableService({ timeTableRepository });
   const courseBookService = getCourseBookService({ courseBookRepository });
+  const lectureService = getLecutureService({ lectureRepository });
 
   const services = {
     authService,
     userService,
     timeTableService,
     courseBookService,
+    lectureService,
   };
 
   // 토큰과 관련된 context는 따로 저장

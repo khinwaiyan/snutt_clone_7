@@ -7,6 +7,7 @@ import { TokenAuthContext } from '@/context/TokenAuthContext';
 import { colorList } from '@/entities/color';
 import { DAY_LABEL_MAP, dayList, hourList } from '@/entities/time';
 import { useGuardContext } from '@/hooks/useGuardContext';
+import { useRouteNavigation } from '@/hooks/useRouteNavigation';
 import { showDialog } from '@/utils/showDialog';
 
 export const TimeTable = ({
@@ -24,6 +25,7 @@ export const TimeTable = ({
   const { token } = useGuardContext(TokenAuthContext);
   const { setOpen } = useGuardContext(ModalManageContext);
   const { showErrorDialog } = showDialog();
+  const { toLectureDetailPage } = useRouteNavigation();
 
   const { data: timeTableData, isError } = useQuery({
     queryKey: [
@@ -49,6 +51,8 @@ export const TimeTable = ({
 
   if (timeTableData === undefined) return <LoadingPage />;
 
+  // 241108 연우: 단순히 token 문제가 아닐 수 있음.
+  // toast로 에러 메세지를 띄워줘야 할 거 같음.
   if (isError) {
     setOpen(true);
     return null;
@@ -152,6 +156,14 @@ export const TimeTable = ({
                   gridColumnEnd: colEnd,
                   gridRowStart: rowStart,
                   gridRowEnd: rowEnd,
+                }}
+                onClick={() => {
+                  if (timetableId !== null) {
+                    toLectureDetailPage({
+                      timetableId,
+                      lectureId: lecture._id,
+                    });
+                  }
                 }}
               >
                 <span className="text-[10px] font-normal">
