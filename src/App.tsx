@@ -27,6 +27,7 @@ import { impleUserRepository } from '@/infrastructure/impleUserRepository';
 import { NotFoundPage } from '@/pages/Error';
 import { LandingPage } from '@/pages/Landing';
 import { LectureDetailPage } from '@/pages/Lecture/LectureDetail';
+import { LectureListPage } from '@/pages/Lecture/LectureList';
 import { MainPage } from '@/pages/Main';
 import { AccountPage } from '@/pages/MyPage/Account';
 import { ChangeNicknamePage } from '@/pages/MyPage/Account/ChangeNickname';
@@ -95,6 +96,10 @@ const authRoutes = [
       {
         path: PATH.LECTURE_DETAIL,
         element: <LectureDetailPage />,
+      },
+      {
+        path: PATH.LECTURE_LIST,
+        element: <LectureListPage />,
       },
     ],
   },

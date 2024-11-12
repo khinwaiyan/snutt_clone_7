@@ -12,7 +12,7 @@ export const useRouteNavigation = () => {
     MYPAGE_ACCOUNT,
     MYPAGE_CHANGENICKNAME,
   } = PATH;
-  const { LECTURE_DETAIL } = HREF;
+  const { LECTURE_DETAIL, LECTURE_LIST } = HREF;
 
   return {
     toMain: () => {
@@ -41,6 +41,9 @@ export const useRouteNavigation = () => {
       lectureId: string;
     }) => {
       navigate(LECTURE_DETAIL(timetableId, lectureId), { replace: true });
+    },
+    toLectureList: ({ timetableId }: { timetableId: string }) => {
+      navigate(LECTURE_LIST(timetableId), { replace: true });
     },
   };
 };
