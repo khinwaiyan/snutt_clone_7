@@ -35,6 +35,7 @@ import { LectureListPage } from '@/pages/Lecture/LectureList';
 import { MainPage } from '@/pages/Main';
 import { AccountPage } from '@/pages/MyPage/Account';
 import { ChangeNicknamePage } from '@/pages/MyPage/Account/ChangeNickname';
+import { ColorSchemePage } from '@/pages/MyPage/ColorScheme';
 import { MyPage } from '@/pages/MyPage/index.tsx';
 import { SignInPage } from '@/pages/SignIn';
 import { SignUpPage } from '@/pages/SignUp';
@@ -96,6 +97,10 @@ const authRoutes = [
       {
         path: PATH.MYPAGE_CHANGENICKNAME,
         element: <ChangeNicknamePage />,
+      },
+      {
+        path: PATH.MYPAGE_COLORSCHEME,
+        element: <ColorSchemePage />,
       },
       {
         path: PATH.LECTURE_DETAIL,
