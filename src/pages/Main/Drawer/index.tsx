@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import type { ReactNode } from 'react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import { LoadingPage } from '@/components/Loading';
 import { ICON_SRC } from '@/constants/fileSource';
@@ -18,7 +18,7 @@ type Drawer = {
   isOpen: boolean;
   onClose: () => void;
   selectedTimetableId: string | null;
-  setTimetableId: React.Dispatch<React.SetStateAction<string | null>>;
+  handleClickSetTimetableId: (timetableId: string | null) => void;
 };
 
 type BottomSheetItem = Pick<TimeTableBrief, '_id' | 'title'>;
@@ -27,13 +27,13 @@ export const Drawer = ({
   isOpen,
   onClose,
   selectedTimetableId,
-  setTimetableId,
+  handleClickSetTimetableId,
 }: Drawer) => {
   const { showTBDDialog, showErrorDialog } = showDialog();
   const { timeTableService } = useGuardContext(ServiceContext);
 
-  const setSelectedTimeTableId = (timetableId: string) => {
-    setTimetableId(timetableId);
+  const setSelectedTimeTableId = (timetableId: string | null) => {
+    handleClickSetTimetableId(timetableId);
     onClose();
   };
 
@@ -162,7 +162,7 @@ export const Drawer = ({
           timetable={bottomSheetTimeTableInfo}
           onClose={closeTimeTableMenu}
           selectedTimetableId={selectedTimetableId}
-          setTimetableId={setTimetableId}
+          handleClickSetTimetableId={handleClickSetTimetableId}
         />
       ) : null}
       {showAddTimeTableBySemesterBottomSheet &&

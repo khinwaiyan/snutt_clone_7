@@ -16,12 +16,16 @@ import { PATH } from '@/constants/route';
 import { EnvContext } from '@/context/EnvContext';
 import { ModalManageContext } from '@/context/ModalManageContext';
 import { ServiceContext } from '@/context/ServiceContext';
+import { TimetableContext } from '@/context/TimetableContext.ts';
 import { TokenAuthContext } from '@/context/TokenAuthContext';
 import { TokenManageContext } from '@/context/TokenManageContext';
 import { useGuardContext } from '@/hooks/useGuardContext';
 import { impleAuthRepository } from '@/infrastructure/impleAuthRepository';
 import { implCourseBookRepository } from '@/infrastructure/impleCourseBookRepository';
-import { implTokenSessionStorageRepository } from '@/infrastructure/impleStorageRepository';
+import {
+  implTimetableStorageRepository,
+  implTokenSessionStorageRepository,
+} from '@/infrastructure/impleStorageRepository';
 import { impleTimeTableRepository } from '@/infrastructure/impleTimeTableRespository';
 import { impleUserRepository } from '@/infrastructure/impleUserRepository';
 import { NotFoundPage } from '@/pages/Error';
@@ -165,13 +169,17 @@ export const App = () => {
   const timeTableRepository = impleTimeTableRepository({ snuttApi });
   const courseBookRepository = implCourseBookRepository({ snuttApi });
   const lectureRepository = implLectureRepository({ snuttApi });
+  const timetableStorageRepository = implTimetableStorageRepository();
 
   const authService = getAuthService({
     authRepository,
     tokenRepository: temporaryStorageRepository,
   });
   const userService = getUserService({ userRepository });
-  const timeTableService = getTimeTableService({ timeTableRepository });
+  const timeTableService = getTimeTableService({
+    timeTableRepository,
+    timetableStorageRepository,
+  });
   const courseBookService = getCourseBookService({ courseBookRepository });
   const lectureService = getLecutureService({ lectureRepository });
 
@@ -189,6 +197,10 @@ export const App = () => {
   // 하지만 우리는 tanstack query를 사용하기로 했으므로
   // 인증 상태에 따라 캐싱된 데이터를 업데이트 or 삭제해줘야 함.
   const [token, setToken] = useState(temporaryStorageRepository.getToken());
+
+  const [timetableId, setTimetableId] = useState(
+    timetableStorageRepository.getStorageTimetableId,
+  );
 
   // token을 context api를 사용하여 관리하면 getToken을 사용할 이유가 없어짐.
   // saveToken과 clearToken만 생성
@@ -229,7 +241,11 @@ export const App = () => {
             value={{ isModalOpen: isTokenError, setOpen }}
           >
             <TokenAuthContext.Provider value={{ token }}>
-              <RouterProvider router={routers} />
+              <TimetableContext.Provider
+                value={{ timetableId, setTimetableId }}
+              >
+                <RouterProvider router={routers} />
+              </TimetableContext.Provider>
             </TokenAuthContext.Provider>
             <Toaster position="top-center" />
           </ModalManageContext.Provider>
