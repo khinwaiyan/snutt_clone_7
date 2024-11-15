@@ -2,15 +2,15 @@ import { useQuery } from '@tanstack/react-query';
 import type { ReactNode } from 'react';
 import { useState } from 'react';
 
+import { AddTimeTableBottomSheet } from '@/app_pages/Main/Drawer/AddTimeTableBottomSheet';
+import { AddTimeTableBySemesterBottomSheet } from '@/app_pages/Main/Drawer/AddTimeTableBySemesterBottomSheet';
+import { TimeTableMenuBottomSheet } from '@/app_pages/Main/Drawer/TimeTableMenuBottomSheet';
 import { LoadingPage } from '@/components/Loading';
 import { ICON_SRC } from '@/constants/fileSource';
 import { ServiceContext } from '@/context/ServiceContext';
 import { TokenAuthContext } from '@/context/TokenAuthContext';
 import type { TimeTableBrief } from '@/entities/timetable';
 import { useGuardContext } from '@/hooks/useGuardContext';
-import { AddTimeTableBottomSheet } from '@/pages/Main/Drawer/AddTimeTableBottomSheet';
-import { AddTimeTableBySemesterBottomSheet } from '@/pages/Main/Drawer/AddTimeTableBySemesterBottomSheet';
-import { TimeTableMenuBottomSheet } from '@/pages/Main/Drawer/TimeTableMenuBottomSheet';
 import { formatSemester } from '@/utils/format';
 import { showDialog } from '@/utils/showDialog';
 
