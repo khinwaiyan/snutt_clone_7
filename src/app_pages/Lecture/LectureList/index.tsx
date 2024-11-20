@@ -1,23 +1,34 @@
 import { useQuery } from '@tanstack/react-query';
+import Image from 'next/image';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { LoadingPage } from '@/components/Loading.tsx';
 import { Navbar } from '@/components/Navbar.tsx';
 import { Layout } from '@/components/styles/Layout.tsx';
 import { DAY_LABEL_MAP } from '@/constants/dayLabel.ts';
+import { ICON_SRC } from '@/constants/fileSource';
 import { ServiceContext } from '@/context/ServiceContext.ts';
 import { TokenAuthContext } from '@/context/TokenAuthContext.ts';
 import { useGuardContext } from '@/hooks/useGuardContext.ts';
 import { useRouteNavigation } from '@/hooks/useRouteNavigation.ts';
 import { showDialog } from '@/utils/showDialog.ts';
 
+import { AddCustomTimeTable } from '../CreateLecture';
+
 export const LectureListPage = () => {
   const { timetableId } = useParams();
   const { showErrorDialog } = showDialog();
   const { toMain } = useRouteNavigation();
-
   const { timetableData } = useGetTimetableData({ timetableId });
+  const [isBottomSheetVisible, setIsBottomSheetVisible] = useState(false);
 
+  const openBottomSheet = () => {
+    setIsBottomSheetVisible(true);
+  };
+  const closeBottomSheet = () => {
+    setIsBottomSheetVisible(false);
+  };
   if (timetableData === undefined) return <LoadingPage />;
 
   if (timetableData.type === 'error') {
@@ -47,7 +58,19 @@ export const LectureListPage = () => {
               <span onClick={toMain}>&larr; 뒤로</span>
             </div>
             <p>강의 목록</p>
-            <div className="absolute right-3 rounded-lg">+</div>
+
+            <div
+              className="font-bold text-gray-400 absolute right-3 rounded-lg"
+              onClick={openBottomSheet}
+            >
+              <Image
+                alt="add"
+                src={ICON_SRC.ADD}
+                width={18}
+                height={18}
+                className="dark:filter dark:brightness-0 dark:invert"
+              />
+            </div>
           </div>
           <div
             id="Main-Container"
@@ -55,7 +78,7 @@ export const LectureListPage = () => {
             p-5 pt-2 w-full mt-16 mb-20
             dark:bg-gray-950 dark:text-gray-200"
           >
-            <div>
+            <div className="w-full">
               {timetableData.data.lecture_list.map((lecture, index) => {
                 const uniqueArray = [
                   ...new Set(
@@ -143,6 +166,9 @@ export const LectureListPage = () => {
           </div>
         </div>
       </Layout>
+      {isBottomSheetVisible && (
+        <AddCustomTimeTable onClose={closeBottomSheet} />
+      )}
     </>
   );
 };
