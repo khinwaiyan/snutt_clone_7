@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 
-import { WhiteButtonBox } from '@/components/common/WhiteButtonBox';
 import { Layout } from '@/components/layout';
 import { LoadingPage } from '@/components/Loading';
+import { MenuCategory, MenuSelect } from '@/components/menu';
 import { Navbar } from '@/components/Navbar';
 import { ModalManageContext } from '@/context/ModalManageContext';
 import { ServiceContext } from '@/context/ServiceContext';
@@ -73,54 +73,35 @@ export const AccountPage = () => {
             id="Main-Container"
             className="mb-[80px] mt-[60px] flex h-lvh w-full flex-col items-center justify-start gap-5 bg-gray-200 p-5 dark:bg-gray-950 dark:text-gray-200"
           >
-            <div className="flex flex-col items-center justify-between">
-              <WhiteButtonBox
+            <MenuCategory>
+              <MenuSelect
+                menu="닉네임 변경"
+                value={`${userData.data.nickname.nickname}#${userData.data.nickname.tag} >`}
+                variant="top"
                 onClick={toChangeNickname}
-                className="flex items-center justify-between rounded-b-[0] border-b border-gray-300"
-              >
-                <span className="m-4">닉네임 변경</span>
-                <div className="m-4">
-                  <span className="text-gray-400">
-                    {userData.data.nickname.nickname}#
-                    {userData.data.nickname.tag} {'>'}
-                  </span>
-                </div>
-              </WhiteButtonBox>
-              <WhiteButtonBox
+              />
+              <MenuSelect
+                menu="닉네임 복사하기"
+                variant="bottom"
                 onClick={handleClickCopyNickname}
-                className="flex items-center justify-between rounded-t-[0]"
-              >
-                <span className="m-4">닉네임 복사하기</span>
-                <span className="m-4 text-gray-400"></span>
-              </WhiteButtonBox>
-            </div>
+              />
+            </MenuCategory>
 
-            <div className="flex flex-col items-center justify-between">
-              <WhiteButtonBox className="flex items-center justify-between">
-                <span className="m-4">아이디 / 비밀번호 추가</span>
-                <span className="m-4 text-gray-400">{'>'}</span>
-              </WhiteButtonBox>
-            </div>
+            <MenuCategory>
+              <MenuSelect menu="아이디 / 비밀번호 추가" value=">" />
+            </MenuCategory>
 
-            <div className="flex flex-col items-center justify-between">
-              <WhiteButtonBox className="flex items-center justify-between">
-                <span className="m-4">SNS 계정 연동 및 해제</span>
-                <span className="m-4 text-gray-400">{'>'}</span>
-              </WhiteButtonBox>
-            </div>
+            <MenuCategory>
+              <MenuSelect menu="SNS 계정 연동 및 해제" value=">" />
+            </MenuCategory>
 
-            <div className="flex flex-col items-center justify-between">
-              <WhiteButtonBox className="flex items-center justify-between">
-                <span className="m-4">이메일</span>
-                <span className="m-4 text-gray-400">{userData.data.email}</span>
-              </WhiteButtonBox>
-            </div>
+            <MenuCategory>
+              <MenuSelect menu="이메일" value={userData.data.email} />
+            </MenuCategory>
 
-            <div className="flex flex-col items-center justify-between">
-              <WhiteButtonBox className="flex items-center justify-between">
-                <span className="m-4 text-red">회원 탈퇴</span>
-              </WhiteButtonBox>
-            </div>
+            <MenuCategory>
+              <MenuSelect menu="회원 탈퇴" highlight="red"></MenuSelect>
+            </MenuCategory>
           </div>
           <div className="fixed bottom-0 w-full max-w-375 bg-white">
             <Navbar selectedMenu="mypage" />

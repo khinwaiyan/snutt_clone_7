@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { WhiteButtonBox } from '@/components/common/WhiteButtonBox';
 import { Layout } from '@/components/layout';
 import { LoadingPage } from '@/components/Loading';
+import { MenuSelect } from '@/components/menu/MenuSelect';
 import { Navbar } from '@/components/Navbar';
 import { ColorSchemeContext } from '@/context/ColorSchemeContext';
 import { ModalManageContext } from '@/context/ModalManageContext';
@@ -67,14 +67,12 @@ export const ColorSchemePage = () => {
             className="mb-[80px] mt-[60px] flex h-lvh w-full flex-col items-center justify-start gap-5 bg-gray-200 p-5 dark:bg-gray-950"
           >
             <div className="flex flex-col items-center justify-between">
-              <WhiteButtonBox
-                className="flex items-center justify-between"
+              <MenuSelect
+                menu={
+                  colorScheme === 'light' ? '☀️ 라이트 모드' : '🌙 다크 모드'
+                }
                 onClick={handleSetColorScheme}
-              >
-                <span className="m-4">
-                  {colorScheme === 'light' ? '☀️ 라이트 모드' : '🌙 다크 모드'}
-                </span>
-              </WhiteButtonBox>
+              />
             </div>
           </div>
           <div className="fixed bottom-0 w-full max-w-375 bg-white">
