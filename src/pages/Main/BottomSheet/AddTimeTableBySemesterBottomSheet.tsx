@@ -2,6 +2,8 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 
 import { BottomSheetContainer } from '@/components/BottomeSheetContainer';
+import { TextInput } from '@/components/input/Input';
+import { LabelContainer } from '@/components/input/LabelContainer';
 import { SpinnerLoading } from '@/components/Loading';
 import { ServiceContext } from '@/context/ServiceContext';
 import { TokenAuthContext } from '@/context/TokenAuthContext';
@@ -44,25 +46,22 @@ export const AddTimeTableBySemesterBottomSheet = ({
             <button onClick={onClickButton}>완료</button>
           </div>
           <div className="flex flex-col gap-2">
-            <h1 className="text-sm text-gray-500 dark:text-gray-200">
-              새로운 시간표 만들기
-            </h1>
-            <input
-              type="text"
-              id="id"
-              value={timeTableName}
-              onChange={(e) => {
-                setTimeTableName(e.target.value);
-              }}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' && timeTableName !== '') {
-                  onClickButton();
-                }
-              }}
-              placeholder={'시간표 제목을 입력하세요'}
-              disabled={isPending}
-              className="w-full border-b-2 border-gray py-1 focus:border-black focus:outline-none dark:bg-gray-600"
-            />
+            <LabelContainer id="id" label="새로운 시간표 만들기">
+              <TextInput
+                id="id"
+                value={timeTableName}
+                onChange={(e) => {
+                  setTimeTableName(e.target.value);
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && timeTableName !== '') {
+                    onClickButton();
+                  }
+                }}
+                placeholder={'시간표 제목을 입력하세요'}
+                disabled={isPending}
+              />
+            </LabelContainer>
           </div>
         </div>
       </BottomSheetContainer>

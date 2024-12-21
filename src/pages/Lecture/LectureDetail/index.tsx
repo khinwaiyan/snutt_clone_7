@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 
 import { Icon } from '@/components/common/Icon';
 import { Layout } from '@/components/common/Layout';
-import { HeaderContainer } from '@/components/header/TimetableHeader';
+import { TimeTableHeaderContainer } from '@/components/header';
 import { LoadingPage } from '@/components/Loading';
 import { DAY_LABEL_MAP } from '@/constants/dayLabel.ts';
 import { ICON_SRC } from '@/constants/fileSource';
@@ -57,35 +57,24 @@ export const LectureDetailPage = () => {
     <>
       <Layout>
         <div className="h-full overflow-y-scroll bg-gray-200 scrollbar-thin scrollbar-track-gray-100 scrollbar-thumb-gray-400 dark:bg-gray-950">
-          <HeaderContainer>
+          <TimeTableHeaderContainer>
             <div className="flex gap-2">
-              <div
-                className="BackButtonWrapper flex cursor-pointer items-center"
-                onClick={toMain}
-              >
+              <div className="flex items-center" onClick={toMain}>
                 <Icon
                   src={ICON_SRC.ARROW.DOWN}
                   alt="뒤로가기 버튼"
-                  className="rotate-90 dark:invert"
+                  className="rotate-90"
                 />
               </div>
               <span>강의 상세 보기</span>
             </div>
             <div className="flex items-center gap-2">
-              <Icon
-                src={ICON_SRC.BELL}
-                alt="알림 버튼"
-                className="dark:invert"
-              />
-              <Icon
-                src={ICON_SRC.BOOKMARK}
-                alt="관심강좌 보기 버튼"
-                className="dark:invert"
-              />
+              <Icon src={ICON_SRC.BELL} alt="알림 버튼" />
+              <Icon src={ICON_SRC.BOOKMARK} alt="관심강좌 보기 버튼" />
               <span>편집</span>
             </div>
-          </HeaderContainer>
-          <div className="mb-10 mt-12 flex flex-col gap-2">
+          </TimeTableHeaderContainer>
+          <div className="mb-10 mt-2 flex flex-col gap-2">
             {lectureInfoSectionList.map((lectureInfoSection, sectionIndex) => (
               <div
                 key={`section-${sectionIndex}`}

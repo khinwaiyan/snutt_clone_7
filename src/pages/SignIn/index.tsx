@@ -56,6 +56,7 @@ export const SignInPage = () => {
               <TextInput
                 id="id"
                 value={id}
+                dark="none"
                 onChange={(e) => {
                   setId(e.target.value);
                 }}
@@ -68,6 +69,7 @@ export const SignInPage = () => {
                 id="password"
                 type="password"
                 value={password}
+                dark="none"
                 onChange={(e) => {
                   setPassword(e.target.value);
                 }}

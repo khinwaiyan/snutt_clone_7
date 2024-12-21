@@ -74,7 +74,7 @@ export const Navbar = ({ selectedMenu }: { selectedMenu: Menu }) => {
   ];
 
   return (
-    <div className="border-t-0.5 flex w-full justify-between border-solid border-t-lineLight px-3.5 py-2.5 pb-5 dark:border-t-gray-800 dark:bg-gray-800 dark:text-gray-200">
+    <div className="border-t-0.5 border-t-lineLight flex w-full justify-between border-solid px-3.5 py-2.5 pb-5 dark:border-t-gray-800 dark:bg-gray-800 dark:text-gray-200">
       {navMenuList.map((navMenu, index) => {
         return navMenu.to !== null ? (
           <div

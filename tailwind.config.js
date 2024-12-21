@@ -5,23 +5,46 @@ export default {
     extend: {
       colors: {
         primary: {
-          DEFAULT: '#2bca43',
+          DEFAULT: '#2BCA43',
+        },
+        red: {
+          DEFAULT: '#E54459',
+          dark: '#D95F71',
         },
         orange: {
           DEFAULT: '#F58D3D',
-          dark: '#E07C2C',
+          dark: '#DF6E3C',
+          hover: '#E07C2C',
+        },
+        yellow: {
+          DEFAULT: '#FFB703',
+          dark: '#FFB703',
+        },
+        lime: {
+          DEFAULT: '#A6D930',
+          dark: '#95B03E',
+          hover: '#00A896',
+        },
+        green: {
+          DEFAULT: '#2BC267',
+          dark: '#2BC267',
         },
         mint: {
           DEFAULT: '#1BD0C8',
-          dark: '#00A896',
+          dark: '#58C1B7',
         },
-        blue: '#1D99E8',
-        red: '#E54459',
-        lime: '#A6D930',
-        green: '#2BC267',
-        cusYellow: '#ffb703',
-        cusPurple: '#b249fc',
-        cusPink: '#fc49db',
+        blue: {
+          DEFAULT: '#1D99E8',
+          dark: '#5BA0D7',
+        },
+        purple: {
+          DEFAULT: '#b249fc',
+          dark: '#b249fc',
+        },
+        pink: {
+          DEFAULT: '#fc49db',
+          dark: '#fc49db',
+        },
         gray: {
           DEFAULT: '#C4C4C4',
           50: '#f9fafb',
@@ -36,9 +59,10 @@ export default {
           900: '#111827',
           950: '#030712',
         },
-        textAlternative: '#8A898E',
-        lineLight: '#EBEBED',
-        lineLightest: '#F5F5F5',
+        line: {
+          DEFAULT: '#EBEBED',
+          light: '#F5F5F5',
+        },
       },
       keyframes: {
         moveUpDown: {

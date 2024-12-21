@@ -2,8 +2,7 @@ import { useState } from 'react';
 
 import { BottomSheetContainer } from '@/components/BottomeSheetContainer';
 import { useBottomSheet } from '@/hooks/useVisible';
-import { ChangeNameDialog } from '@/pages/Main/Drawer/TimeTableMenuBottomSheet/ChangeNameDialog';
-import { DeleteDialog } from '@/pages/Main/Drawer/TimeTableMenuBottomSheet/DeleteDialog';
+import { ChangeNameDialog, DeleteDialog } from '@/pages/Main/Dialog';
 import { showDialog } from '@/utils/showDialog';
 
 type TimeTableMenuBottomSheet = {
@@ -95,7 +94,7 @@ export const TimeTableMenuBottomSheet = ({
         {menuOptions.map((option, index) => (
           <div
             key={index}
-            className="flex cursor-pointer items-center py-2 hover:bg-gray-100 dark:text-gray-200"
+            className="flex cursor-pointer items-center rounded px-2 py-2 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700"
             onClick={(e) => {
               e.stopPropagation();
               option.action();

@@ -1,8 +1,31 @@
+import type { VariantProps } from 'class-variance-authority';
+import { cva } from 'class-variance-authority';
+
 import { cn } from '@/utils/designSystem';
 
-type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
+const textInputVariants = cva(
+  'dark-text-gray-200 border-b-2 border-gray py-1 text-sm focus:border-mint focus:outline-none',
+  {
+    variants: {
+      dark: {
+        default: 'dark:bg-gray-800 dark:text-gray-200',
+        none: '',
+      },
+    },
+    defaultVariants: {
+      dark: 'default',
+    },
+  },
+);
+
+interface TextInputProps
+  extends React.InputHTMLAttributes<HTMLInputElement>,
+    VariantProps<typeof textInputVariants> {
   type?: 'text' | 'password';
-};
+  darkModeInvert?: 'none' | 'default';
+}
+
+type SelectInputProps = React.InputHTMLAttributes<HTMLSelectElement>;
 
 export const TextInput = ({
   type,
@@ -12,7 +35,8 @@ export const TextInput = ({
   onKeyDown,
   placeholder,
   className,
-}: InputProps) => {
+  dark,
+}: TextInputProps) => {
   return (
     <input
       type={type === 'password' ? 'password' : 'text'}
@@ -22,9 +46,31 @@ export const TextInput = ({
       onKeyDown={onKeyDown}
       placeholder={placeholder}
       className={cn(
-        'border-b-2 border-gray py-1 text-sm focus:border-orange focus:outline-none',
-        className,
+        textInputVariants({
+          dark,
+          className,
+        }),
       )}
     />
+  );
+};
+
+export const SelectInput = ({
+  onChange,
+  disabled,
+  className,
+  children,
+}: SelectInputProps) => {
+  return (
+    <select
+      onChange={onChange}
+      className={cn(
+        'border-b-2 border-gray py-1 text-sm focus:border-mint focus:outline-none dark:bg-gray-800 dark:text-gray-200',
+        className,
+      )}
+      disabled={disabled}
+    >
+      {children}
+    </select>
   );
 };

@@ -30,11 +30,21 @@ export const LoadingPage = () => {
     <div className="flex min-h-screen flex-col items-center justify-center gap-3 p-3 text-center dark:bg-gray-800">
       <div className="relative flex h-20 items-center justify-center space-x-2 text-6xl font-bold">
         <h1 className="flex space-x-1">
-          <span className="animate-updown-1 text-blue">S</span>
-          <span className="animate-updown-2 text-mint">N</span>
-          <span className="animate-updown-3 text-lime">U</span>
-          <span className="animate-updown-4 text-green">T</span>
-          <span className="animate-updown-5 text-orange">T</span>
+          <span className="animate-updown-1 text-blue dark:text-blue-dark">
+            S
+          </span>
+          <span className="animate-updown-2 text-mint dark:text-mint-dark">
+            N
+          </span>
+          <span className="animate-updown-3 text-lime dark:text-lime-dark">
+            U
+          </span>
+          <span className="animate-updown-4 text-green dark:text-green-dark">
+            T
+          </span>
+          <span className="animate-updown-5 text-orange dark:text-orange-dark">
+            T
+          </span>
         </h1>
       </div>
       <p className="mt-4 text-lg text-gray-700 dark:text-gray-400">

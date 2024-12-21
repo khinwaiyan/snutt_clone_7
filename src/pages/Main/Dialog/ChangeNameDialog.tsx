@@ -2,6 +2,8 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 
 import { DialogContainer } from '@/components/Dialog';
+import { TextInput } from '@/components/input/Input';
+import { LabelContainer } from '@/components/input/LabelContainer';
 import { SpinnerLoading } from '@/components/Loading';
 import { ServiceContext } from '@/context/ServiceContext';
 import { TokenAuthContext } from '@/context/TokenAuthContext';
@@ -34,23 +36,27 @@ export const ChangeNameDialog = ({
   return (
     <DialogContainer isVisible={isVisible} onClick={handleClose}>
       {isPending && <SpinnerLoading />}
-      <h1 className="text-lg font-semibold">이름 변경하기</h1>
-      <input
-        type="text"
+      <LabelContainer
         id="id"
-        value={timetableName}
-        onChange={(e) => {
-          setTimetableName(e.target.value);
-        }}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter' && timetableName !== '') {
-            onClickButton();
-          }
-        }}
-        placeholder={'시간표 제목을 입력하세요'}
-        disabled={isPending}
-        className="border-b-2 border-gray py-1 focus:border-black focus:outline-none"
-      />
+        label="이름 변경하기"
+        className="gap-3 text-lg font-semibold"
+      >
+        <TextInput
+          id="id"
+          value={timetableName}
+          onChange={(e) => {
+            setTimetableName(e.target.value);
+          }}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' && timetableName !== '') {
+              onClickButton();
+            }
+          }}
+          placeholder={'시간표 제목을 입력하세요'}
+          disabled={isPending}
+          dark="none"
+        />
+      </LabelContainer>
       <div className="flex-end flex justify-end gap-4">
         <button onClick={handleClose}>취소</button>
         <button onClick={onClickButton}>확인</button>

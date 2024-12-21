@@ -1,20 +1,20 @@
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 
+import { Icon } from '@/components/common/Icon';
 import { Layout } from '@/components/common/Layout';
+import { TimeTableHeaderContainer } from '@/components/header';
 import { LoadingPage } from '@/components/Loading';
 import { Navbar } from '@/components/Navbar';
+import { ICON_SRC } from '@/constants/fileSource';
 import { ServiceContext } from '@/context/ServiceContext.ts';
 import { TimetableContext } from '@/context/TimetableContext';
 import { TokenAuthContext } from '@/context/TokenAuthContext';
 import { useGuardContext } from '@/hooks/useGuardContext.ts';
 import { useRouteNavigation } from '@/hooks/useRouteNavigation.ts';
 import { Drawer } from '@/pages/Main/Drawer';
-import { Header } from '@/pages/Main/Header';
 import { TimeTableView } from '@/pages/Main/TimeTable';
 import { showDialog } from '@/utils/showDialog';
-
-import { useGetTimetableData } from '../Lecture/LectureList';
 
 export const MainPage = () => {
   const [isDrawerOpen, setDrawerOpen] = useState(false);
@@ -71,7 +71,7 @@ export const MainPage = () => {
 
   return (
     <Layout>
-      <Header
+      <TimeTableHeader
         onMenuClick={toggleDrawer}
         onLectureListClick={() => {
           if (timetableId !== null) {
@@ -95,7 +95,42 @@ export const MainPage = () => {
   );
 };
 
-export const useGetTimeTable = () => {
+const TimeTableHeader = ({
+  onMenuClick,
+  onLectureListClick,
+  totalCredit,
+  title,
+}: {
+  onMenuClick: () => void;
+  onLectureListClick: () => void;
+  totalCredit: number;
+  title: string;
+}) => {
+  return (
+    <TimeTableHeaderContainer>
+      <div className="flex items-center gap-2">
+        <Icon
+          src={ICON_SRC.HAMBURGER}
+          alt="서랍 열기 버튼"
+          onClick={onMenuClick}
+        />
+        <h1 className="font-semibold">{title}</h1>
+        <span className="text-xs text-gray-400">{`(${totalCredit} 학점)`}</span>
+      </div>
+      <div className="flex items-center gap-2">
+        <Icon
+          src={ICON_SRC.LIST_BULLET}
+          onClick={onLectureListClick}
+          alt="강의 목록 보기 버튼"
+        />
+        <Icon src={ICON_SRC.SHARE} alt="공유하기 버튼" />
+        <Icon src={ICON_SRC.BELL} alt="알림 버튼" />
+      </div>
+    </TimeTableHeaderContainer>
+  );
+};
+
+const useGetTimeTable = () => {
   const { token } = useGuardContext(TokenAuthContext);
   const { timeTableService } = useGuardContext(ServiceContext);
 
@@ -111,4 +146,31 @@ export const useGetTimeTable = () => {
   });
 
   return { timeTableListData };
+};
+
+const useGetTimetableData = ({
+  timetableId,
+}: {
+  timetableId: string | undefined;
+}) => {
+  const { token } = useGuardContext(TokenAuthContext);
+  const { timeTableService } = useGuardContext(ServiceContext);
+
+  const { data: timetableData } = useQuery({
+    queryKey: [
+      'TimeTableService',
+      'getTimeTableById',
+      token,
+      timetableId,
+    ] as const,
+    queryFn: ({ queryKey: [, , t, ttId] }) => {
+      if (t === null || ttId === undefined) {
+        throw new Error('잘못된 요청입니다.');
+      }
+      return timeTableService.getTimeTableById({ token: t, timetableId: ttId });
+    },
+    enabled: token !== null && timetableId !== undefined,
+  });
+
+  return { timetableData };
 };

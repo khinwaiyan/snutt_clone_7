@@ -8,8 +8,8 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: 'text-white bg-orange hover:bg-orange-dark cursor-pointer',
-        mint: 'text-white bg-mint hover:bg-mint-dark cursor-pointer',
+        default: 'text-white bg-mint hover:bg-orange-hover cursor-pointer',
+        orange: 'text-white bg-orange hover:bg-mint-hover cursor-pointer',
         white: 'text-black bg-white hover:text-orange cursor-pointer',
         disable: 'bg-gray-100 text-gray-500 cursor-not-allowed',
       },

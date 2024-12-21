@@ -150,7 +150,7 @@ export const LectureListPage = () => {
   );
 };
 
-export const useGetTimetableData = ({
+const useGetTimetableData = ({
   timetableId,
 }: {
   timetableId: string | undefined;

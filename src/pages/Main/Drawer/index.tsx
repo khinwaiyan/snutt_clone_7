@@ -9,10 +9,11 @@ import { ServiceContext } from '@/context/ServiceContext';
 import { TokenAuthContext } from '@/context/TokenAuthContext';
 import type { TimeTableBrief } from '@/entities/timetable';
 import { useGuardContext } from '@/hooks/useGuardContext';
-import { useGetTimeTable } from '@/pages/Main';
-import { AddTimeTableBottomSheet } from '@/pages/Main/Drawer/AddTimeTableBottomSheet';
-import { AddTimeTableBySemesterBottomSheet } from '@/pages/Main/Drawer/AddTimeTableBySemesterBottomSheet';
-import { TimeTableMenuBottomSheet } from '@/pages/Main/Drawer/TimeTableMenuBottomSheet';
+import {
+  AddTimeTableBottomSheet,
+  AddTimeTableBySemesterBottomSheet,
+  TimeTableMenuBottomSheet,
+} from '@/pages/Main/BottomSheet';
 import { formatSemester } from '@/utils/format';
 import { showDialog } from '@/utils/showDialog';
 
@@ -119,7 +120,7 @@ export const Drawer = ({
       <div
         className={`absolute left-0 top-0 h-full w-[330px] transform border-r border-gray-300 bg-white px-4 ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
-        } z-50 transition-transform duration-300 ease-in-out dark:border-gray-600 dark:bg-gray-950 dark:text-gray-200`}
+        } z-50 transition-transform duration-300 ease-in-out dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200`}
       >
         <DrawerHeader onClose={onClose} />
         <ul className="drawer-content">
@@ -156,6 +157,7 @@ export const Drawer = ({
                       <TimeTableMenuIcon onClick={showTBDDialog}>
                         <Icon
                           src={ICON_SRC.COPY}
+                          size="sm"
                           className="dark:invert"
                           alt="복사 아이콘"
                         />
@@ -170,6 +172,7 @@ export const Drawer = ({
                       >
                         <Icon
                           src={ICON_SRC.MORE}
+                          size="sm"
                           className="rotate-90 dark:invert"
                           alt="더보기 아이콘"
                         />
@@ -264,6 +267,7 @@ const DrawerHeader = ({ onClose }: { onClose(): void }) => {
         <Icon
           src={ICON_SRC.LOGO}
           alt="SNUTT 로고"
+          darkModeInvert="none"
           className="dark:brightness-150 dark:filter"
         />
         <h1 className="text-lg font-semibold">SNUTT</h1>
@@ -358,6 +362,7 @@ const TimeTableMenuBar = ({
           <div className="flex items-center">
             <Icon
               size="sm"
+              darkModeInvert="none"
               src={ICON_SRC.CHECK_BOX.CIRCLE}
               alt="선택된 시칸표 아이콘"
             />
@@ -374,6 +379,7 @@ const TimeTableMenuBar = ({
         {timeTable.isPrimary && (
           <Icon
             size="sm"
+            darkModeInvert="none"
             src={ICON_SRC.PRIMARY}
             alt="학기 대표 시간표 아이콘"
           />
@@ -410,4 +416,22 @@ const AddTimeTableBySemesterMenuBar = ({
       {children}
     </p>
   );
+};
+
+const useGetTimeTable = () => {
+  const { token } = useGuardContext(TokenAuthContext);
+  const { timeTableService } = useGuardContext(ServiceContext);
+
+  const { data: timeTableListData } = useQuery({
+    queryKey: ['TimeTableService', 'getTimeTableList', token] as const,
+    queryFn: ({ queryKey: [, , t] }) => {
+      if (t === null) {
+        throw new Error('토큰이 없습니다.');
+      }
+      return timeTableService.getTimeTableList({ token: t });
+    },
+    enabled: token !== null,
+  });
+
+  return { timeTableListData };
 };

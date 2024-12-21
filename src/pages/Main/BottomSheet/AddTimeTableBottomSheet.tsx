@@ -2,6 +2,9 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 
 import { BottomSheetContainer } from '@/components/BottomeSheetContainer';
+import { TextInput } from '@/components/input/Input';
+import { SelectInput } from '@/components/input/Input';
+import { LabelContainer } from '@/components/input/LabelContainer';
 import { SpinnerLoading } from '@/components/Loading';
 import { ServiceContext } from '@/context/ServiceContext';
 import { TokenAuthContext } from '@/context/TokenAuthContext';
@@ -59,12 +62,8 @@ export const AddTimeTableBottomSheet = ({
           <button onClick={handleClose}>취소</button>
           <button onClick={onClickButton}>완료</button>
         </div>
-        <div className="flex flex-col gap-2">
-          <h1 className="text-sm text-gray-500 dark:text-gray-200">
-            새로운 시간표 만들기
-          </h1>
-          <input
-            type="text"
+        <LabelContainer label="새로운 시간표 만들기" id="id">
+          <TextInput
             id="id"
             value={timeTableName}
             onChange={(e) => {
@@ -77,18 +76,13 @@ export const AddTimeTableBottomSheet = ({
             }}
             placeholder={'시간표 제목을 입력하세요'}
             disabled={isPending}
-            className="w-full border-b-2 border-gray py-1 focus:border-black focus:outline-none dark:bg-gray-600 dark:text-gray-200"
           />
-        </div>
-        <div className="flex flex-col gap-2">
-          <h1 className="text-sm text-gray-500 dark:text-gray-200">
-            학기 선택
-          </h1>
-          <select
+        </LabelContainer>
+        <LabelContainer id="" label="학기 선택">
+          <SelectInput
             onChange={(e) => {
               clickOption(e.target.value);
             }}
-            className="border-b-2 border-gray py-1 focus:border-black focus:outline-none dark:bg-gray-600 dark:text-gray-200"
             disabled={isPending}
           >
             <option value="">학기를 선택하세요</option>
@@ -102,8 +96,8 @@ export const AddTimeTableBottomSheet = ({
                 </option>
               );
             })}
-          </select>
-        </div>
+          </SelectInput>
+        </LabelContainer>
       </div>
     </BottomSheetContainer>
   );
