@@ -1,17 +1,17 @@
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 
-import { Icon } from '@/components/common/Icon';
-import { Layout } from '@/components/common/Layout';
 import { TimeTableHeaderContainer } from '@/components/header';
+import { Icon } from '@/components/icon';
+import { Layout } from '@/components/layout';
 import { LoadingPage } from '@/components/Loading';
 import { Navbar } from '@/components/Navbar';
-import { ICON_SRC } from '@/constants/fileSource';
-import { ServiceContext } from '@/context/ServiceContext.ts';
+import { ServiceContext } from '@/context/ServiceContext';
 import { TimetableContext } from '@/context/TimetableContext';
 import { TokenAuthContext } from '@/context/TokenAuthContext';
-import { useGuardContext } from '@/hooks/useGuardContext.ts';
-import { useRouteNavigation } from '@/hooks/useRouteNavigation.ts';
+import { ICON_SRC } from '@/entities/route';
+import { useGuardContext } from '@/hooks/useGuardContext';
+import { useRouteNavigation } from '@/hooks/useRouteNavigation';
 import { Drawer } from '@/pages/Main/Drawer';
 import { TimeTableView } from '@/pages/Main/TimeTable';
 import { showDialog } from '@/utils/showDialog';

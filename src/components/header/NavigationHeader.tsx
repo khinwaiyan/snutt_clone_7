@@ -1,5 +1,5 @@
-import { Icon } from '@/components/common/Icon';
-import { ICON_SRC } from '@/constants/fileSource';
+import { Icon } from '@/components/icon';
+import { ICON_SRC } from '@/entities/route';
 
 type NavigationHeaderProps = {
   darkModeInvert?: 'default' | 'none';

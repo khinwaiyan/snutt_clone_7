@@ -1,5 +1,5 @@
 import { getAuthService } from '@/usecases/authServices';
-import type { getTimeTableService } from '@/usecases/timeTableService.ts';
+import type { getTimeTableService } from '@/usecases/timeTableService';
 
 const storageKey = {
   snuttToken: 'snutt_token',

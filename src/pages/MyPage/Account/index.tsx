@@ -1,16 +1,16 @@
 import { useQuery } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 
-import { Layout } from '@/components/common/Layout';
 import { WhiteButtonBox } from '@/components/common/WhiteButtonBox';
-import { LoadingPage } from '@/components/Loading.tsx';
-import { Navbar } from '@/components/Navbar.tsx';
-import { ModalManageContext } from '@/context/ModalManageContext.ts';
-import { ServiceContext } from '@/context/ServiceContext.ts';
-import { TokenAuthContext } from '@/context/TokenAuthContext.ts';
-import { useGuardContext } from '@/hooks/useGuardContext.ts';
-import { useRouteNavigation } from '@/hooks/useRouteNavigation.ts';
-import { showDialog } from '@/utils/showDialog.ts';
+import { Layout } from '@/components/layout';
+import { LoadingPage } from '@/components/Loading';
+import { Navbar } from '@/components/Navbar';
+import { ModalManageContext } from '@/context/ModalManageContext';
+import { ServiceContext } from '@/context/ServiceContext';
+import { TokenAuthContext } from '@/context/TokenAuthContext';
+import { useGuardContext } from '@/hooks/useGuardContext';
+import { useRouteNavigation } from '@/hooks/useRouteNavigation';
+import { showDialog } from '@/utils/showDialog';
 
 export const AccountPage = () => {
   const { token } = useGuardContext(TokenAuthContext);

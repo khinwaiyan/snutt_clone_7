@@ -2,16 +2,16 @@ import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { Layout } from '@/components/common/Layout';
-import { LoadingPage } from '@/components/Loading.tsx';
-import { Navbar } from '@/components/Navbar.tsx';
-import { DAY_LABEL_MAP } from '@/constants/dayLabel.ts';
-import { ICON_SRC } from '@/constants/fileSource';
-import { ServiceContext } from '@/context/ServiceContext.ts';
-import { TokenAuthContext } from '@/context/TokenAuthContext.ts';
-import { useGuardContext } from '@/hooks/useGuardContext.ts';
-import { useRouteNavigation } from '@/hooks/useRouteNavigation.ts';
-import { showDialog } from '@/utils/showDialog.ts';
+import { Layout } from '@/components/layout';
+import { LoadingPage } from '@/components/Loading';
+import { Navbar } from '@/components/Navbar';
+import { ServiceContext } from '@/context/ServiceContext';
+import { TokenAuthContext } from '@/context/TokenAuthContext';
+import { ICON_SRC } from '@/entities/route';
+import { DAY_LABEL_MAP } from '@/entities/time';
+import { useGuardContext } from '@/hooks/useGuardContext';
+import { useRouteNavigation } from '@/hooks/useRouteNavigation';
+import { showDialog } from '@/utils/showDialog';
 
 import { AddCustomTimeTable } from '../CreateLecture';
 

@@ -1,16 +1,16 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 
-import { Layout } from '@/components/common/Layout';
 import { OptionLabel } from '@/components/common/OptionLabel';
-import { LoadingPage, SpinnerLoading } from '@/components/Loading.tsx';
-import { Navbar } from '@/components/Navbar.tsx';
-import { ModalManageContext } from '@/context/ModalManageContext.ts';
-import { ServiceContext } from '@/context/ServiceContext.ts';
-import { TokenAuthContext } from '@/context/TokenAuthContext.ts';
-import { useGuardContext } from '@/hooks/useGuardContext.ts';
-import { useRouteNavigation } from '@/hooks/useRouteNavigation.ts';
-import { showDialog } from '@/utils/showDialog.ts';
+import { Layout } from '@/components/layout';
+import { LoadingPage, SpinnerLoading } from '@/components/Loading';
+import { Navbar } from '@/components/Navbar';
+import { ModalManageContext } from '@/context/ModalManageContext';
+import { ServiceContext } from '@/context/ServiceContext';
+import { TokenAuthContext } from '@/context/TokenAuthContext';
+import { useGuardContext } from '@/hooks/useGuardContext';
+import { useRouteNavigation } from '@/hooks/useRouteNavigation';
+import { showDialog } from '@/utils/showDialog';
 
 export const ChangeNicknamePage = () => {
   const { token } = useGuardContext(TokenAuthContext);

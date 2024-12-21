@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-import { HREF, PATH } from '@/constants/route.ts';
+import { HREF, PATH } from '@/entities/route';
 
 export const useRouteNavigation = () => {
   const navigate = useNavigate();

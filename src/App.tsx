@@ -12,20 +12,20 @@ import {
   AuthProtectedRoute,
   AuthProtectedSwitchRoute,
 } from '@/components/Auth';
-import { PATH } from '@/constants/route';
-import { ColorSchemeContext } from '@/context/ColorSchemeContext.ts';
+import { ColorSchemeContext } from '@/context/ColorSchemeContext';
 import { ModalManageContext } from '@/context/ModalManageContext';
 import { ServiceContext } from '@/context/ServiceContext';
-import { TimetableContext } from '@/context/TimetableContext.ts';
+import { TimetableContext } from '@/context/TimetableContext';
 import { TokenAuthContext } from '@/context/TokenAuthContext';
 import { TokenManageContext } from '@/context/TokenManageContext';
+import { PATH } from '@/entities/route';
 import { impleAuthRepository } from '@/infrastructure/impleAuthRepository';
 import { implCourseBookRepository } from '@/infrastructure/impleCourseBookRepository';
 import {
   implTimetableStorageRepository,
   implTokenSessionStorageRepository,
 } from '@/infrastructure/impleStorageRepository';
-import { impleColorSchemeRepository } from '@/infrastructure/impleStorageRepository.ts';
+import { impleColorSchemeRepository } from '@/infrastructure/impleStorageRepository';
 import { impleTimeTableRepository } from '@/infrastructure/impleTimeTableRespository';
 import { impleUserRepository } from '@/infrastructure/impleUserRepository';
 import { NotFoundPage } from '@/pages/Error';
@@ -33,14 +33,14 @@ import { LandingPage } from '@/pages/Landing';
 import { LectureDetailPage } from '@/pages/Lecture/LectureDetail';
 import { LectureListPage } from '@/pages/Lecture/LectureList';
 import { MainPage } from '@/pages/Main';
+import { MyPage } from '@/pages/MyPage';
 import { AccountPage } from '@/pages/MyPage/Account';
 import { ChangeNicknamePage } from '@/pages/MyPage/Account/ChangeNickname';
 import { ColorSchemePage } from '@/pages/MyPage/ColorScheme';
-import { MyPage } from '@/pages/MyPage/index.tsx';
 import { SignInPage } from '@/pages/SignIn';
 import { SignUpPage } from '@/pages/SignUp';
 import { getAuthService } from '@/usecases/authServices';
-import { getColorSchemeService } from '@/usecases/colorSchemeService.ts';
+import { getColorSchemeService } from '@/usecases/colorSchemeService';
 import { getCourseBookService } from '@/usecases/courseBookService';
 import { getTimeTableService } from '@/usecases/timeTableService';
 import { getUserService } from '@/usecases/userService';

@@ -46,7 +46,11 @@ export const AddTimeTableBySemesterBottomSheet = ({
             <button onClick={onClickButton}>완료</button>
           </div>
           <div className="flex flex-col gap-2">
-            <LabelContainer id="id" label="새로운 시간표 만들기">
+            <LabelContainer
+              id="id"
+              label="새로운 시간표 만들기"
+              className="gap-2"
+            >
               <TextInput
                 id="id"
                 value={timeTableName}

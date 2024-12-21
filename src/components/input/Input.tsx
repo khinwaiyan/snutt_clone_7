@@ -4,15 +4,20 @@ import { cva } from 'class-variance-authority';
 import { cn } from '@/utils/designSystem';
 
 const textInputVariants = cva(
-  'dark-text-gray-200 border-b-2 border-gray py-1 text-sm focus:border-mint focus:outline-none',
+  'dark-text-gray-200 border-b-2 border-gray py-1 text-sm focus:outline-none',
   {
     variants: {
+      variant: {
+        default: 'focus:border-mint',
+        orange: 'focus:border-orange',
+      },
       dark: {
         default: 'dark:bg-gray-800 dark:text-gray-200',
         none: '',
       },
     },
     defaultVariants: {
+      variant: 'default',
       dark: 'default',
     },
   },
@@ -35,6 +40,7 @@ export const TextInput = ({
   onKeyDown,
   placeholder,
   className,
+  variant,
   dark,
 }: TextInputProps) => {
   return (
@@ -47,6 +53,7 @@ export const TextInput = ({
       placeholder={placeholder}
       className={cn(
         textInputVariants({
+          variant,
           dark,
           className,
         }),

@@ -1,17 +1,17 @@
 import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
 
-import { Button } from '@/components/common/Button';
-import { Layout } from '@/components/common/Layout';
+import { Button } from '@/components/button';
 import { NavigationHeader } from '@/components/header';
 import { TextInput } from '@/components/input/Input';
 import { LabelContainer } from '@/components/input/LabelContainer';
+import { Layout } from '@/components/layout';
 import { LoadingPage } from '@/components/Loading';
 import { ModalManageContext } from '@/context/ModalManageContext';
 import { ServiceContext } from '@/context/ServiceContext';
 import { TokenManageContext } from '@/context/TokenManageContext';
 import { useGuardContext } from '@/hooks/useGuardContext';
-import { useRouteNavigation } from '@/hooks/useRouteNavigation.ts';
+import { useRouteNavigation } from '@/hooks/useRouteNavigation';
 import { showDialog } from '@/utils/showDialog';
 
 export const SignInPage = () => {
@@ -56,6 +56,7 @@ export const SignInPage = () => {
               <TextInput
                 id="id"
                 value={id}
+                variant="orange"
                 dark="none"
                 onChange={(e) => {
                   setId(e.target.value);
@@ -69,6 +70,7 @@ export const SignInPage = () => {
                 id="password"
                 type="password"
                 value={password}
+                variant="orange"
                 dark="none"
                 onChange={(e) => {
                   setPassword(e.target.value);

@@ -1,6 +1,6 @@
-import { DAY_LABEL_MAP } from '@/constants/dayLabel';
 import { ServiceContext } from '@/context/ServiceContext';
 import { colorList } from '@/entities/color';
+import { DAY_LABEL_MAP } from '@/entities/time';
 import { dayList, hourList } from '@/entities/time';
 import type { TimeTable } from '@/entities/timetable';
 import { useGuardContext } from '@/hooks/useGuardContext';

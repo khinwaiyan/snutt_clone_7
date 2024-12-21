@@ -1,9 +1,9 @@
 import type { ReactNode } from 'react';
 
-import { ServiceContext } from '../context/ServiceContext.ts';
-import { TokenManageContext } from '../context/TokenManageContext.ts';
-import { useGuardContext } from '../hooks/useGuardContext.ts';
-import { useRouteNavigation } from '../hooks/useRouteNavigation.ts';
+import { ServiceContext } from '../context/ServiceContext';
+import { TokenManageContext } from '../context/TokenManageContext';
+import { useGuardContext } from '../hooks/useGuardContext';
+import { useRouteNavigation } from '../hooks/useRouteNavigation';
 
 export const ReSignInDialog = () => {
   const { toSignIn } = useRouteNavigation();

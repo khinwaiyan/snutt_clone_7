@@ -1,9 +1,9 @@
 import toast from 'react-hot-toast';
 
-import { Icon } from '@/components/common/Icon';
-import { ICON_SRC } from '@/constants/fileSource';
-import { PATH } from '@/constants/route';
-import { useRouteNavigation } from '@/hooks/useRouteNavigation.ts';
+import { Icon } from '@/components/icon';
+import { ICON_SRC } from '@/entities/route';
+import { PATH } from '@/entities/route';
+import { useRouteNavigation } from '@/hooks/useRouteNavigation';
 
 type Menu = 'timetable' | 'search' | 'ev' | 'friends' | 'mypage';
 

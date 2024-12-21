@@ -1,19 +1,19 @@
 import { useQuery } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 
-import { Layout } from '@/components/common/Layout';
 import { OptionLabel } from '@/components/common/OptionLabel';
 import { WhiteButtonBox } from '@/components/common/WhiteButtonBox';
-import { LoadingPage } from '@/components/Loading.tsx';
-import { Navbar } from '@/components/Navbar.tsx';
-import { ColorSchemeContext } from '@/context/ColorSchemeContext.ts';
-import { ModalManageContext } from '@/context/ModalManageContext.ts';
-import { ServiceContext } from '@/context/ServiceContext.ts';
-import { TokenAuthContext } from '@/context/TokenAuthContext.ts';
-import { TokenManageContext } from '@/context/TokenManageContext.ts';
-import { useGuardContext } from '@/hooks/useGuardContext.ts';
-import { useRouteNavigation } from '@/hooks/useRouteNavigation.ts';
-import { showDialog } from '@/utils/showDialog.ts';
+import { Layout } from '@/components/layout';
+import { LoadingPage } from '@/components/Loading';
+import { Navbar } from '@/components/Navbar';
+import { ColorSchemeContext } from '@/context/ColorSchemeContext';
+import { ModalManageContext } from '@/context/ModalManageContext';
+import { ServiceContext } from '@/context/ServiceContext';
+import { TokenAuthContext } from '@/context/TokenAuthContext';
+import { TokenManageContext } from '@/context/TokenManageContext';
+import { useGuardContext } from '@/hooks/useGuardContext';
+import { useRouteNavigation } from '@/hooks/useRouteNavigation';
+import { showDialog } from '@/utils/showDialog';
 
 export const MyPage = () => {
   const { clearToken } = useGuardContext(TokenManageContext);

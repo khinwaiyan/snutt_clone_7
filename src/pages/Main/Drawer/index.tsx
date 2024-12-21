@@ -2,11 +2,11 @@ import { useQuery } from '@tanstack/react-query';
 import type { ReactNode } from 'react';
 import { useState } from 'react';
 
-import { Icon } from '@/components/common/Icon';
+import { Icon } from '@/components/icon';
 import { LoadingPage } from '@/components/Loading';
-import { ICON_SRC } from '@/constants/fileSource';
 import { ServiceContext } from '@/context/ServiceContext';
 import { TokenAuthContext } from '@/context/TokenAuthContext';
+import { ICON_SRC } from '@/entities/route';
 import type { TimeTableBrief } from '@/entities/timetable';
 import { useGuardContext } from '@/hooks/useGuardContext';
 import {
@@ -272,17 +272,7 @@ const DrawerHeader = ({ onClose }: { onClose(): void }) => {
         />
         <h1 className="text-lg font-semibold">SNUTT</h1>
       </div>
-      <button
-        className="text-xl focus:outline-none dark:bg-gray-600"
-        onClick={onClose}
-        aria-label="Close Menu"
-      >
-        <Icon
-          src={ICON_SRC.CLOSE}
-          alt="서랍 닫기 버튼"
-          className="dark:brightness-0 dark:invert dark:filter"
-        />
-      </button>
+      <Icon onClick={onClose} src={ICON_SRC.CLOSE} alt="서랍 닫기 버튼" />
     </div>
   );
 };

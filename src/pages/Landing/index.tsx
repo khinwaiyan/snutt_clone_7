@@ -1,8 +1,8 @@
-import { Button } from '@/components/common/Button';
-import { Icon } from '@/components/common/Icon';
-import { Layout } from '@/components/common/Layout';
-import { ICON_SRC } from '@/constants/fileSource';
-import { useRouteNavigation } from '@/hooks/useRouteNavigation.ts';
+import { Button } from '@/components/button';
+import { Icon } from '@/components/icon';
+import { Layout } from '@/components/layout';
+import { ICON_SRC } from '@/entities/route';
+import { useRouteNavigation } from '@/hooks/useRouteNavigation';
 export const LandingPage = () => {
   const { toSignIn, toSignUp } = useRouteNavigation();
   const socialLoginIcon = [
