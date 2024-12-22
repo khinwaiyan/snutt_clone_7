@@ -24,15 +24,9 @@ export const SignInPage = () => {
 
   const canSubmit = id !== '' && password !== '';
 
-  const onClickButton = () => {
+  const onSubmit = () => {
     if (canSubmit) {
       signIn({ inputId: id, inputPassword: password });
-    }
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter' && canSubmit) {
-      onClickButton();
     }
   };
 
@@ -47,33 +41,40 @@ export const SignInPage = () => {
       <NavigationHeader darkModeInvert="none" title="로그인" moveTo={toMain} />
       <div className="flex h-full w-full flex-auto flex-col justify-between px-5 pb-8">
         <div className="w-full space-y-4">
-          <LabelContainer id="id" label="아이디">
-            <TextInput
-              id="id"
-              value={id}
-              variant="orange"
-              dark="none"
-              onChange={(e) => {
-                setId(e.target.value);
-              }}
-              onKeyDown={handleKeyDown}
-              placeholder="아이디를 입력하세요"
-            />
-          </LabelContainer>
-          <LabelContainer id="password" label="비밀번호">
-            <TextInput
-              id="password"
-              type="password"
-              value={password}
-              variant="orange"
-              dark="none"
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
-              onKeyDown={handleKeyDown}
-              placeholder="비밀번호를 입력하세요"
-            />
-          </LabelContainer>
+          <form
+            id="signInForm"
+            onSubmit={(event) => {
+              event.preventDefault();
+              onSubmit();
+            }}
+            className="flex flex-col gap-4"
+          >
+            <LabelContainer id="id" label="아이디">
+              <TextInput
+                id="id"
+                value={id}
+                variant="orange"
+                dark="none"
+                onChange={(e) => {
+                  setId(e.target.value);
+                }}
+                placeholder="아이디를 입력하세요"
+              />
+            </LabelContainer>
+            <LabelContainer id="password" label="비밀번호">
+              <TextInput
+                id="password"
+                type="password"
+                value={password}
+                variant="orange"
+                dark="none"
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+                placeholder="비밀번호를 입력하세요"
+              />
+            </LabelContainer>
+          </form>
           <div className="justify-left flex gap-2 py-4 text-sm text-gray-500">
             <a onClick={onClickTBD} className="underline hover:text-orange">
               아이디 찾기
@@ -84,10 +85,7 @@ export const SignInPage = () => {
             </a>
           </div>
         </div>
-        <Button
-          variant={canSubmit ? 'default' : 'disable'}
-          onClick={onClickButton}
-        >
+        <Button form="signInForm" variant={canSubmit ? 'default' : 'disable'}>
           로그인
         </Button>
       </div>

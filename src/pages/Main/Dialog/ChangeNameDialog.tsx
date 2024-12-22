@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 
+import { TextButton } from '@/components/button';
 import { DialogContainer } from '@/components/Dialog';
 import { TextInput } from '@/components/input/Input';
 import { LabelContainer } from '@/components/input/LabelContainer';
@@ -27,7 +28,7 @@ export const ChangeNameDialog = ({
     handleClose,
   });
 
-  const onClickButton = () => {
+  const onSubmit = () => {
     if (timetableName !== '') {
       changeTimeTableName({ timetableId, timetableName });
     }
@@ -36,30 +37,27 @@ export const ChangeNameDialog = ({
   return (
     <DialogContainer isVisible={isVisible} onClick={handleClose}>
       {isPending && <SpinnerLoading />}
-      <LabelContainer
-        id="id"
-        label="이름 변경하기"
-        className="gap-3 text-lg font-semibold"
-      >
-        <TextInput
+      <form id="changeNameForm" onSubmit={onSubmit}>
+        <LabelContainer
           id="id"
-          value={timetableName}
-          onChange={(e) => {
-            setTimetableName(e.target.value);
-          }}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' && timetableName !== '') {
-              onClickButton();
-            }
-          }}
-          placeholder={'시간표 제목을 입력하세요'}
-          disabled={isPending}
-          dark="none"
-        />
-      </LabelContainer>
+          label="이름 변경하기"
+          className="gap-3 text-lg font-semibold"
+        >
+          <TextInput
+            id="id"
+            value={timetableName}
+            onChange={(e) => {
+              setTimetableName(e.target.value);
+            }}
+            placeholder={'시간표 제목을 입력하세요'}
+            disabled={isPending}
+            dark="none"
+          />
+        </LabelContainer>
+      </form>
       <div className="flex-end flex justify-end gap-4">
-        <button onClick={handleClose}>취소</button>
-        <button onClick={onClickButton}>확인</button>
+        <TextButton onClick={handleClose}>취소</TextButton>
+        <TextButton form="changeNameForm">확인</TextButton>
       </div>
     </DialogContainer>
   );

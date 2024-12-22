@@ -28,7 +28,7 @@ export const AddTimeTableBottomSheet = ({
 
   const { createTimeTable, isPending } = useCreateTimeTable({ handleClose });
 
-  const onClickButton = () => {
+  const onSubmit = () => {
     if (year !== null && semester !== null && timeTableName !== '') {
       createTimeTable({
         inputYear: year,
@@ -60,44 +60,49 @@ export const AddTimeTableBottomSheet = ({
       <div className="flex flex-col gap-6 dark:bg-gray-800 dark:text-gray-200">
         <div className="flex-end flex justify-between">
           <button onClick={handleClose}>취소</button>
-          <button onClick={onClickButton}>완료</button>
+          <button form="addTimeTableForm">완료</button>
         </div>
-        <LabelContainer label="새로운 시간표 만들기" id="id">
-          <TextInput
-            id="id"
-            value={timeTableName}
-            onChange={(e) => {
-              setTimeTableName(e.target.value);
-            }}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' && timeTableName !== '') {
-                onClickButton();
-              }
-            }}
-            placeholder={'시간표 제목을 입력하세요'}
-            disabled={isPending}
-          />
-        </LabelContainer>
-        <LabelContainer id="" label="학기 선택">
-          <SelectInput
-            onChange={(e) => {
-              clickOption(e.target.value);
-            }}
-            disabled={isPending}
-          >
-            <option value="">학기를 선택하세요</option>
-            {courseBookList.map((courseBook) => {
-              return (
-                <option
-                  key={`${courseBook.year}-${courseBook.semester}`}
-                  value={`${courseBook.year}-${courseBook.semester}`}
-                >
-                  {`${courseBook.year}년 ${formatSemester(Number(courseBook.semester))}`}
-                </option>
-              );
-            })}
-          </SelectInput>
-        </LabelContainer>
+        <form
+          id="addTimeTableForm"
+          onSubmit={(event) => {
+            event.preventDefault();
+            onSubmit();
+          }}
+          className="flex flex-col gap-6"
+        >
+          <LabelContainer label="새로운 시간표 만들기" id="id">
+            <TextInput
+              id="id"
+              value={timeTableName}
+              onChange={(e) => {
+                setTimeTableName(e.target.value);
+              }}
+              placeholder={'시간표 제목을 입력하세요'}
+              disabled={isPending}
+            />
+          </LabelContainer>
+          <LabelContainer label="학기 선택" id="semester">
+            <SelectInput
+              id="semester"
+              onChange={(e) => {
+                clickOption(e.target.value);
+              }}
+              disabled={isPending}
+            >
+              <option value="">학기를 선택하세요</option>
+              {courseBookList.map((courseBook) => {
+                return (
+                  <option
+                    key={`${courseBook.year}-${courseBook.semester}`}
+                    value={`${courseBook.year}-${courseBook.semester}`}
+                  >
+                    {`${courseBook.year}년 ${formatSemester(Number(courseBook.semester))}`}
+                  </option>
+                );
+              })}
+            </SelectInput>
+          </LabelContainer>
+        </form>
       </div>
     </BottomSheetContainer>
   );

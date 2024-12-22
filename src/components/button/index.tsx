@@ -21,7 +21,7 @@ const buttonVariants = cva(
 );
 
 const textButtonVariants = cva(
-  'rounded-lg p-1 text-sm hover:bg-gray-100 dark:hover:bg-gray-600',
+  'rounded transition-colors duration-200 p-1 text-sm hover:bg-gray-100 dark:hover:bg-gray-600',
   {
     variants: {
       variant: {
@@ -48,6 +48,7 @@ interface TextButtonProps
     VariantProps<typeof textButtonVariants> {}
 
 export const Button = ({
+  form,
   children,
   onClick,
   className,
@@ -56,6 +57,8 @@ export const Button = ({
   const disabled = variant === 'disable' ? true : false;
   return (
     <button
+      type="submit"
+      form={form}
       className={cn(buttonVariants({ variant, className }))}
       onClick={onClick}
       disabled={disabled}
@@ -71,12 +74,14 @@ export const TextButton = ({
   className,
   variant,
   children,
+  onClick,
 }: TextButtonProps) => {
   return (
     <button
       type="submit"
       form={form}
       disabled={disabled}
+      onClick={onClick}
       className={cn(textButtonVariants({ variant, className }))}
     >
       {children}
