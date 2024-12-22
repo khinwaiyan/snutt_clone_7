@@ -25,7 +25,10 @@ export const NavigationHeader = ({
           className="rotate-90"
           alt="뒤로가기"
         />
-        <span className="text-sm text-black hover:text-orange" onClick={moveTo}>
+        <span
+          className="text-sm text-black hover:text-orange dark:text-gray-200 dark:hover:text-orange-dark"
+          onClick={moveTo}
+        >
           뒤로
         </span>
       </div>
