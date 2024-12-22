@@ -32,6 +32,10 @@ interface TextInputProps
 
 type SelectInputProps = React.InputHTMLAttributes<HTMLSelectElement>;
 
+type iosTextInputProps = React.InputHTMLAttributes<HTMLInputElement> & {
+  type?: 'text' | 'password';
+};
+
 export const TextInput = ({
   type,
   value,
@@ -79,5 +83,28 @@ export const SelectInput = ({
     >
       {children}
     </select>
+  );
+};
+
+export const IosTextInput = ({
+  type,
+  value,
+  id,
+  onChange,
+  placeholder,
+  className,
+}: iosTextInputProps) => {
+  return (
+    <input
+      type={type === 'password' ? 'password' : 'text'}
+      id={id}
+      value={value}
+      onChange={onChange}
+      placeholder={placeholder}
+      className={cn(
+        'm-1 mb-3 h-10 w-[335px] rounded-lg bg-white pl-4 dark:bg-gray-800 dark:text-gray-200',
+        className,
+      )}
+    />
   );
 };

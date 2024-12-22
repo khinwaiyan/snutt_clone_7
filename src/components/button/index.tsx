@@ -20,11 +20,32 @@ const buttonVariants = cva(
   },
 );
 
+const textButtonVariants = cva(
+  'rounded-lg p-1 text-sm hover:bg-gray-100 dark:hover:bg-gray-600',
+  {
+    variants: {
+      variant: {
+        default:
+          'text-gray-500 hover:text-orange dark:text-gray-200 cursor-pointer',
+        red: 'text-red dark:text-red-dark cursor-pointer',
+        disable: 'text-gray-400 dark:text-gray-300 cursor-pointer',
+      },
+    },
+    defaultVariants: {
+      variant: 'default',
+    },
+  },
+);
+
 interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   onClick?: () => void;
 }
+
+interface TextButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof textButtonVariants> {}
 
 export const Button = ({
   children,
@@ -38,6 +59,25 @@ export const Button = ({
       className={cn(buttonVariants({ variant, className }))}
       onClick={onClick}
       disabled={disabled}
+    >
+      {children}
+    </button>
+  );
+};
+
+export const TextButton = ({
+  form,
+  disabled,
+  className,
+  variant,
+  children,
+}: TextButtonProps) => {
+  return (
+    <button
+      type="submit"
+      form={form}
+      disabled={disabled}
+      className={cn(textButtonVariants({ variant, className }))}
     >
       {children}
     </button>

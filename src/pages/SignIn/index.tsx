@@ -44,58 +44,52 @@ export const SignInPage = () => {
 
   return (
     <Layout>
-      <div className="flex h-screen w-full flex-col items-center px-5">
-        <NavigationHeader
-          darkModeInvert="none"
-          title="로그인"
-          moveTo={toMain}
-        />
-        <div className="flex h-full w-full flex-auto flex-col justify-between pb-8">
-          <div className="w-full space-y-4">
-            <LabelContainer id="id" label="아이디">
-              <TextInput
-                id="id"
-                value={id}
-                variant="orange"
-                dark="none"
-                onChange={(e) => {
-                  setId(e.target.value);
-                }}
-                onKeyDown={handleKeyDown}
-                placeholder="아이디를 입력하세요"
-              />
-            </LabelContainer>
-            <LabelContainer id="password" label="비밀번호">
-              <TextInput
-                id="password"
-                type="password"
-                value={password}
-                variant="orange"
-                dark="none"
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                }}
-                onKeyDown={handleKeyDown}
-                placeholder="비밀번호를 입력하세요"
-              />
-            </LabelContainer>
-            <div className="justify-left flex gap-2 py-4 text-sm text-gray-500">
-              <a onClick={onClickTBD} className="underline hover:text-orange">
-                아이디 찾기
-              </a>
-              <span>|</span>
-              <a onClick={onClickTBD} className="underline hover:text-orange">
-                비밀번호 찾기
-              </a>
-            </div>
+      <NavigationHeader darkModeInvert="none" title="로그인" moveTo={toMain} />
+      <div className="flex h-full w-full flex-auto flex-col justify-between px-5 pb-8">
+        <div className="w-full space-y-4">
+          <LabelContainer id="id" label="아이디">
+            <TextInput
+              id="id"
+              value={id}
+              variant="orange"
+              dark="none"
+              onChange={(e) => {
+                setId(e.target.value);
+              }}
+              onKeyDown={handleKeyDown}
+              placeholder="아이디를 입력하세요"
+            />
+          </LabelContainer>
+          <LabelContainer id="password" label="비밀번호">
+            <TextInput
+              id="password"
+              type="password"
+              value={password}
+              variant="orange"
+              dark="none"
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+              onKeyDown={handleKeyDown}
+              placeholder="비밀번호를 입력하세요"
+            />
+          </LabelContainer>
+          <div className="justify-left flex gap-2 py-4 text-sm text-gray-500">
+            <a onClick={onClickTBD} className="underline hover:text-orange">
+              아이디 찾기
+            </a>
+            <span>|</span>
+            <a onClick={onClickTBD} className="underline hover:text-orange">
+              비밀번호 찾기
+            </a>
           </div>
-          <Button
-            variant={canSubmit ? 'default' : 'disable'}
-            onClick={onClickButton}
-          >
-            로그인
-          </Button>
         </div>
+        <Button
+          variant={canSubmit ? 'default' : 'disable'}
+          onClick={onClickButton}
+        >
+          로그인
+        </Button>
       </div>
     </Layout>
   );

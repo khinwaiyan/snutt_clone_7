@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react';
+
 import { Icon } from '@/components/icon';
 import { ICON_SRC } from '@/entities/route';
 
@@ -5,27 +7,35 @@ type NavigationHeaderProps = {
   darkModeInvert?: 'default' | 'none';
   title: string;
   moveTo(): void;
+  children?: ReactNode;
 };
 
 export const NavigationHeader = ({
   darkModeInvert = 'default',
   title,
   moveTo,
+  children,
 }: NavigationHeaderProps) => {
   return (
-    <div className="relative mt-4 flex w-full pb-6">
-      <div className="absolute left-0 top-0.5 flex cursor-pointer items-center">
+    <div className="relative flex w-full justify-between px-5 py-3">
+      <div className="flex cursor-pointer items-center">
         <Icon
           src={ICON_SRC.ARROW.DOWN}
           darkModeInvert={darkModeInvert}
           className="rotate-90"
           alt="뒤로가기"
         />
-        <span className="text-gray-500 hover:text-orange" onClick={moveTo}>
+        <span
+          className="text-sm text-gray-500 hover:text-orange"
+          onClick={moveTo}
+        >
           뒤로
         </span>
       </div>
-      <h1 className="w-full text-center text-xl font-semibold">{title}</h1>
+      <h1 className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-semibold">
+        {title}
+      </h1>
+      <div className="flex cursor-pointer items-center">{children}</div>
     </div>
   );
 };
