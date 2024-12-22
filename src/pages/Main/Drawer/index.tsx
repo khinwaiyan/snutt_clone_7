@@ -313,14 +313,14 @@ const CourseBookMenuBar = ({
         <span className="font-bold">
           {courseBook.year}년 {formatSemester(courseBook.semester)}
         </span>
-        <button onClick={onClick}>
+        <div onClick={onClick}>
           <Icon
             src={ICON_SRC.ARROW.DOWN}
             alt="학기별 시간표 열기 버튼"
             className={`cursor-pointer transition-transform duration-200 ${isOpen ? 'rotate-180' : 'rotate-0'} dark:invert`}
             aria-expanded={isOpen}
           />
-        </button>
+        </div>
         {courseBook.items.length === 0 ? (
           <div className="flex items-center">
             <div className="h-1.5 w-1.5 rounded-[50%] bg-red"></div>

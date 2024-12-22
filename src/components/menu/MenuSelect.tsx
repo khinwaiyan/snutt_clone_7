@@ -43,7 +43,7 @@ export const MenuSelect = ({
   onClick,
 }: MenuSelectProps) => {
   return (
-    <button
+    <div
       className={cn(menuSelectVariants({ variant, highlight, className }))}
       onClick={onClick}
     >
@@ -52,6 +52,6 @@ export const MenuSelect = ({
         <span className="text-gray-400">{value}</span>
         {children}
       </div>
-    </button>
+    </div>
   );
 };

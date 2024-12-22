@@ -17,7 +17,7 @@ export const NavigationHeader = ({
   children,
 }: NavigationHeaderProps) => {
   return (
-    <div className="relative flex w-full justify-between px-5 py-3">
+    <div className="relative flex w-full justify-between px-5 py-3 dark:bg-gray-800 dark:text-gray-200">
       <div className="flex cursor-pointer items-center">
         <Icon
           src={ICON_SRC.ARROW.DOWN}
@@ -26,7 +26,7 @@ export const NavigationHeader = ({
           alt="뒤로가기"
         />
         <span
-          className="text-sm text-gray-500 hover:text-orange"
+          className="text-sm text-gray-200 hover:text-orange"
           onClick={moveTo}
         >
           뒤로

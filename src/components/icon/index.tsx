@@ -39,8 +39,9 @@ export const Icon = ({
     <button
       onClick={onClick}
       className={cn(iconVariants({ size, darkModeInvert, className }))}
+      aria-label={alt}
     >
-      <img src={src} alt={alt} className="w-full object-cover" />
+      <img src={src} alt={alt} className="h-full w-full object-contain" />
     </button>
   );
 };
