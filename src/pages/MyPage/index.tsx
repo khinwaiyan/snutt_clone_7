@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { TitleHeader } from '@/components/header';
+import { Icon } from '@/components/icon';
 import { Layout } from '@/components/layout';
 import { LoadingPage } from '@/components/Loading';
 import { MenuCategory, MenuOption, MenuSelect } from '@/components/menu';
@@ -10,6 +11,7 @@ import { ModalManageContext } from '@/context/ModalManageContext';
 import { ServiceContext } from '@/context/ServiceContext';
 import { TokenAuthContext } from '@/context/TokenAuthContext';
 import { TokenManageContext } from '@/context/TokenManageContext';
+import { ICON_SRC } from '@/entities/route';
 import { useGuardContext } from '@/hooks/useGuardContext';
 import { useRouteNavigation } from '@/hooks/useRouteNavigation';
 import { showDialog } from '@/utils/showDialog';
@@ -67,21 +69,37 @@ export const MyPage = () => {
             />
             <MenuSelect
               menu="시간표 설정"
-              value=">"
               variant="none"
               onClick={showTBDDialog}
-            />
+            >
+              <Icon
+                src={ICON_SRC.ARROW.DOWN}
+                size="sm"
+                className="-rotate-90"
+              />
+            </MenuSelect>
             <MenuSelect
               menu="시간표 테마"
-              value=">"
               variant="bottom"
               onClick={showTBDDialog}
-            />
+            >
+              <Icon
+                src={ICON_SRC.ARROW.DOWN}
+                size="sm"
+                className="-rotate-90"
+              />
+            </MenuSelect>
           </MenuCategory>
 
           <MenuCategory>
             <MenuOption label="서비스" />
-            <MenuSelect menu="빈자리 알림" value=">" onClick={showTBDDialog} />
+            <MenuSelect menu="빈자리 알림" onClick={showTBDDialog}>
+              <Icon
+                src={ICON_SRC.ARROW.DOWN}
+                size="sm"
+                className="-rotate-90"
+              />
+            </MenuSelect>
           </MenuCategory>
 
           <MenuCategory>
@@ -94,18 +112,25 @@ export const MyPage = () => {
             />
             <MenuSelect
               menu="개발자 정보"
-              value=">"
               variant="bottom"
               onClick={showTBDDialog}
-            />
+            >
+              <Icon
+                src={ICON_SRC.ARROW.DOWN}
+                size="sm"
+                className="-rotate-90"
+              />
+            </MenuSelect>
           </MenuCategory>
 
           <MenuCategory>
-            <MenuSelect
-              menu="개발자 괴롭히기"
-              value=">"
-              onClick={showTBDDialog}
-            />
+            <MenuSelect menu="개발자 괴롭히기" onClick={showTBDDialog}>
+              <Icon
+                src={ICON_SRC.ARROW.DOWN}
+                size="sm"
+                className="-rotate-90"
+              />
+            </MenuSelect>
           </MenuCategory>
 
           <MenuCategory>

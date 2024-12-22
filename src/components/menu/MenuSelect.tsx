@@ -39,6 +39,7 @@ export const MenuSelect = ({
   className,
   variant,
   highlight,
+  children,
   onClick,
 }: MenuSelectProps) => {
   return (
@@ -47,7 +48,10 @@ export const MenuSelect = ({
       onClick={onClick}
     >
       <span>{menu}</span>
-      <span className="text-gray-400">{value}</span>
+      <div className="flex items-center gap-2">
+        <span className="text-gray-400">{value}</span>
+        {children}
+      </div>
     </button>
   );
 };

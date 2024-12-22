@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 
+import { Icon } from '@/components/icon';
 import { Layout } from '@/components/layout';
 import { LoadingPage } from '@/components/Loading';
 import { MenuCategory, MenuSelect } from '@/components/menu';
@@ -8,6 +9,7 @@ import { Navbar } from '@/components/Navbar';
 import { ModalManageContext } from '@/context/ModalManageContext';
 import { ServiceContext } from '@/context/ServiceContext';
 import { TokenAuthContext } from '@/context/TokenAuthContext';
+import { ICON_SRC } from '@/entities/route';
 import { useGuardContext } from '@/hooks/useGuardContext';
 import { useRouteNavigation } from '@/hooks/useRouteNavigation';
 import { showDialog } from '@/utils/showDialog';
@@ -76,10 +78,16 @@ export const AccountPage = () => {
             <MenuCategory>
               <MenuSelect
                 menu="닉네임 변경"
-                value={`${userData.data.nickname.nickname}#${userData.data.nickname.tag} >`}
+                value={`${userData.data.nickname.nickname}#${userData.data.nickname.tag}`}
                 variant="top"
                 onClick={toChangeNickname}
-              />
+              >
+                <Icon
+                  src={ICON_SRC.ARROW.DOWN}
+                  size="sm"
+                  className="-rotate-90"
+                />
+              </MenuSelect>
               <MenuSelect
                 menu="닉네임 복사하기"
                 variant="bottom"
@@ -88,11 +96,23 @@ export const AccountPage = () => {
             </MenuCategory>
 
             <MenuCategory>
-              <MenuSelect menu="아이디 / 비밀번호 추가" value=">" />
+              <MenuSelect menu="아이디 / 비밀번호 추가">
+                <Icon
+                  src={ICON_SRC.ARROW.DOWN}
+                  size="sm"
+                  className="-rotate-90"
+                />
+              </MenuSelect>
             </MenuCategory>
 
             <MenuCategory>
-              <MenuSelect menu="SNS 계정 연동 및 해제" value=">" />
+              <MenuSelect menu="SNS 계정 연동 및 해제">
+                <Icon
+                  src={ICON_SRC.ARROW.DOWN}
+                  size="sm"
+                  className="-rotate-90"
+                />
+              </MenuSelect>
             </MenuCategory>
 
             <MenuCategory>
