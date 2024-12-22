@@ -37,7 +37,13 @@ export const ChangeNameDialog = ({
   return (
     <DialogContainer isVisible={isVisible} onClick={handleClose}>
       {isPending && <SpinnerLoading />}
-      <form id="changeNameForm" onSubmit={onSubmit}>
+      <form
+        id="changeNameForm"
+        onSubmit={(event) => {
+          event.preventDefault();
+          onSubmit();
+        }}
+      >
         <LabelContainer
           id="id"
           label="이름 변경하기"
@@ -56,8 +62,12 @@ export const ChangeNameDialog = ({
         </LabelContainer>
       </form>
       <div className="flex-end flex justify-end gap-4">
-        <TextButton onClick={handleClose}>취소</TextButton>
-        <TextButton form="changeNameForm">확인</TextButton>
+        <TextButton dark="none" onClick={handleClose}>
+          취소
+        </TextButton>
+        <TextButton dark="none" form="changeNameForm">
+          확인
+        </TextButton>
       </div>
     </DialogContainer>
   );

@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import toast from 'react-hot-toast';
 
+import { NavigationHeader } from '@/components/header';
 import { Icon } from '@/components/icon';
 import { Layout } from '@/components/layout';
 import { LoadingPage } from '@/components/Loading';
@@ -15,22 +15,11 @@ import { useRouteNavigation } from '@/hooks/useRouteNavigation';
 import { showDialog } from '@/utils/showDialog';
 
 export const AccountPage = () => {
-  const { token } = useGuardContext(TokenAuthContext);
-  const { userService } = useGuardContext(ServiceContext);
   const { setOpen } = useGuardContext(ModalManageContext);
-  const { showErrorDialog } = showDialog();
+  const { showErrorDialog, showCompleteDialog } = showDialog();
   const { toMypage, toChangeNickname } = useRouteNavigation();
 
-  const { data: userData, isError } = useQuery({
-    queryKey: ['UserService', 'getUserInfo', token] as const,
-    queryFn: ({ queryKey: [, , t] }) => {
-      if (t === null) {
-        throw new Error();
-      }
-      return userService.getUserInfo({ token: t });
-    },
-    enabled: token !== null,
-  });
+  const { userData, isError } = useGetUserInfo();
 
   if (isError) {
     setOpen(true);
@@ -45,36 +34,26 @@ export const AccountPage = () => {
         `${userData.data.nickname.nickname}#${userData.data.nickname.tag}`,
       );
     } else {
-      toast.error('몬가... 발생했습니다...');
+      showErrorDialog('닉네임 복사에 실패했습니다.');
     }
   };
 
   const handleClickCopyNickname = () => {
     copyNicknameToClipboard()
-      .then(() => toast('닉네임을 복사했습니다.'))
-      .catch(() => toast.error('몬가... 발생했습니다...'));
+      .then(() => {
+        showCompleteDialog('닉네임을 복사했습니다.');
+      })
+      .catch(() => {
+        showErrorDialog('닉네임 복사에 실패했습니다.');
+      });
   };
 
   if (userData.type === 'success') {
     return (
       <Layout>
-        <div
-          id="Wrapper-Container"
-          className="flex min-h-screen w-full flex-col items-center dark:bg-gray-950"
-        >
-          <div
-            id="upper-bar"
-            className="fixed top-0 flex w-full max-w-375 items-center justify-center bg-white px-6 py-4 dark:bg-gray-800 dark:text-gray-200"
-          >
-            <div className="BackButtonWrapper absolute left-3 flex cursor-pointer items-center rounded-lg text-gray-500 hover:text-orange dark:text-gray-200">
-              <span onClick={toMypage}>&larr; 뒤로</span>
-            </div>
-            <p className="font-bold">내 계정</p>
-          </div>
-          <div
-            id="Main-Container"
-            className="mb-[80px] mt-[60px] flex h-lvh w-full flex-col items-center justify-start gap-5 bg-gray-200 p-5 dark:bg-gray-950 dark:text-gray-200"
-          >
+        <NavigationHeader title="내 계정" moveTo={toMypage} />
+        <div className="flex w-full flex-1 flex-col items-center bg-gray-200 p-5 dark:bg-gray-950 dark:text-gray-200">
+          <div id="Main-Container" className="flex flex-col gap-5">
             <MenuCategory>
               <MenuSelect
                 menu="닉네임 변경"
@@ -123,14 +102,30 @@ export const AccountPage = () => {
               <MenuSelect menu="회원 탈퇴" highlight="red"></MenuSelect>
             </MenuCategory>
           </div>
-          <div className="fixed bottom-0 w-full max-w-375 bg-white">
-            <Navbar selectedMenu="mypage" />
-          </div>
         </div>
+        <Navbar selectedMenu="mypage" />
       </Layout>
     );
   }
 
   showErrorDialog(userData.message);
   return null;
+};
+
+const useGetUserInfo = () => {
+  const { token } = useGuardContext(TokenAuthContext);
+  const { userService } = useGuardContext(ServiceContext);
+
+  const { data: userData, isError } = useQuery({
+    queryKey: ['UserService', 'getUserInfo', token] as const,
+    queryFn: ({ queryKey: [, , t] }) => {
+      if (t === null) {
+        throw new Error();
+      }
+      return userService.getUserInfo({ token: t });
+    },
+    enabled: token !== null,
+  });
+
+  return { userData, isError };
 };

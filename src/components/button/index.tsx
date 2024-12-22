@@ -21,18 +21,16 @@ const buttonVariants = cva(
 );
 
 const textButtonVariants = cva(
-  'rounded transition-colors duration-200 p-1 text-sm hover:bg-gray-100 dark:hover:bg-gray-600',
+  'rounded transition-colors duration-200 p-1 text-sm text-gray-500 hover:bg-gray-100 hover:text-orange cursor-pointer',
   {
     variants: {
-      variant: {
-        default:
-          'text-gray-500 hover:text-orange dark:text-gray-200 cursor-pointer',
-        red: 'text-red dark:text-red-dark cursor-pointer',
-        disable: 'text-gray-400 dark:text-gray-300 cursor-pointer',
+      dark: {
+        default: 'dark:text-gray-200 dark:hover:bg-gray-600',
+        none: '',
       },
     },
     defaultVariants: {
-      variant: 'default',
+      dark: 'default',
     },
   },
 );
@@ -72,7 +70,7 @@ export const TextButton = ({
   form,
   disabled,
   className,
-  variant,
+  dark,
   children,
   onClick,
 }: TextButtonProps) => {
@@ -82,7 +80,7 @@ export const TextButton = ({
       form={form}
       disabled={disabled}
       onClick={onClick}
-      className={cn(textButtonVariants({ variant, className }))}
+      className={cn(textButtonVariants({ dark, className }))}
     >
       {children}
     </button>

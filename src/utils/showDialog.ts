@@ -10,5 +10,8 @@ export const showDialog = () => {
         icon: '🔔',
       });
     },
+    showCompleteDialog: (message: string) => {
+      toast.success(message);
+    },
   };
 };

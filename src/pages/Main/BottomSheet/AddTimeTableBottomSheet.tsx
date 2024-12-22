@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 
 import { BottomSheetContainer } from '@/components/BottomeSheetContainer';
+import { TextButton } from '@/components/button';
 import { TextInput } from '@/components/input/Input';
 import { SelectInput } from '@/components/input/Input';
 import { LabelContainer } from '@/components/input/LabelContainer';
@@ -59,8 +60,8 @@ export const AddTimeTableBottomSheet = ({
       {isPending && <SpinnerLoading />}
       <div className="flex flex-col gap-6 dark:bg-gray-800 dark:text-gray-200">
         <div className="flex-end flex justify-between">
-          <button onClick={handleClose}>취소</button>
-          <button form="addTimeTableForm">완료</button>
+          <TextButton onClick={handleClose}>취소</TextButton>
+          <TextButton form="addTimeTableForm">완료</TextButton>
         </div>
         <form
           id="addTimeTableForm"
